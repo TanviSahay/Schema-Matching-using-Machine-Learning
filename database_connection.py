@@ -132,9 +132,31 @@ for i in range (0,len(descr)):
         #data = curs.fetchall()
         data = list(zip(*curs.fetchall())[0])
         temp = []
+        # Converting the date format to mm/dd/yyyy
         if attributes[descr[i][0]][0] == 4 :
             for j in range (0,len(data)):
                 temp.append(data[j].strftime('%m/%d/%Y'))
         
             data = temp        
-        print descr[i][0], data
+         
+        if attributes[descr[i][0]][0] == 1 or attributes[descr[i][0]][0] == 0   :
+           #hgajhdd
+        
+        else:
+              
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
