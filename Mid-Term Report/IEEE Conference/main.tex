@@ -405,7 +405,7 @@
 
 \begin{abstract}
 %\boldmath
-\blindtext[1]
+In this project, we deal with the problem of matching schema of different tables across databases with each other with the help of certain machine learning algorithms. This is done in order to recognize which attributes contain the same or similar values and might map to each other in case the two databases are to be used in unison. We also tackle the challenge of a single attribute mapping to multiple attributes along with the case of basic one-to-one mapping. For this report, one to one mapping using Kohonen Self-Organizing Maps and Multilayer Perceptrons has been explained and experiments carried out have been presented. 
 \end{abstract}
 % IEEEtran.cls defaults to using nonbold math in the Abstract.
 % This preserves the distinction between vectors and scalars. However,
@@ -415,13 +415,6 @@
 % in the abstract anyway.
 
 % Note that keywords are not normally used for peerreview papers.
-\begin{IEEEkeywords}
-IEEEtran, journal, \LaTeX, paper, template.
-\end{IEEEkeywords}
-
-
-
-
 
 
 % For peer review papers, you can put extra information on the cover
@@ -437,10 +430,12 @@ IEEEtran, journal, \LaTeX, paper, template.
 
 
 \section{Introduction}
-\blindtext
+Schema matching is one of the key stepping stones for performing data integration and automatic this task has been a topic of research for several years. In simpe terms, schema matching can be explained as follows: Given two databases $X(x_1, x_2, x_3)$ and $Y(y_1, y_2, y_3)$ with $x_n$ and $y_n$ representing their attributes resepectively, we match a schema attribute to another either if it is semantically similar or if it represents the same data. Consider Figure 1 which contains two schemas: \textit{Student} and \textit{Grad-Student}.
+\begin{figure}
 
-\subsection{Subsection Heading Here}
-\blindtext
+\end{figure}
+%\subsection{Subsection Heading Here}
+%\blindtext
 
 % needed in second column of first page if using \IEEEpubid
 %\IEEEpubidadjcol
@@ -529,13 +524,33 @@ IEEEtran, journal, \LaTeX, paper, template.
 
 
 
-\section{Conclusion}
+\section{Related Work}
 \blindtext
 
+\section{Feature Extraction}
+Shruti gave it already, I think.
 
+\section{One to One Schema Matching}
+\blindtext
 
+\subsection{Kohonen Self Organizing Maps}
+Theory of SOM and how it was implemented. Image of the network might be good.
 
+\subsection{Multilayer Perceptron}
+This section only if we decide to do this finally.
 
+\section{Experimentation}
+
+\subsection{Dataset}
+\subsection{Data Labelling}
+We might need to hand label the attributes as a base line to check the accuracy of out system.
+\subsection{Results}
+Clustering accuracy table, scatter plots etc.
+
+\section{Limitations}
+No many to one mapping and anything else you can think of.
+
+\section{Future Work}
 % if have a single appendix:
 %\appendix[Proof of the Zonklar Equations]
 % or
@@ -551,22 +566,23 @@ IEEEtran, journal, \LaTeX, paper, template.
 %
 
 
-\appendices
-\section{Proof of the First Zonklar Equation}
-\blindtext
+
+%\appendices
+%\section{Proof of the First Zonklar Equation}
+%\blindtext
 
 % use section* for acknowledgement
-\section*{Acknowledgment}
+%\section*{Acknowledgment}
 
 
-The authors would like to thank...
+%The authors would like to thank...
 
 
 % Can use something like this to put references on a page
 % by themselves when using endfloat and the captionsoff option.
-\ifCLASSOPTIONcaptionsoff
-  \newpage
-\fi
+%\ifCLASSOPTIONcaptionsoff
+%  \newpage
+%\fi
 
 
 
