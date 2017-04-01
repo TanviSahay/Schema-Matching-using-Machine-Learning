@@ -85,8 +85,9 @@ Create Table HospitalMeasures(	Provider_Number numeric PRIMARY KEY,
 				Flu_Season_End_Date date);
 
 
-\copy HospitalMeasures FROM 'C:/Users/Shruti Jadon/Desktop/DatabaseProject/CreateDatabase/HP.csv' DELIMITER ',' CSV	
+\copy HospitalMeasures FROM './HP.csv' DELIMITER ',' CSV	
 
+/*
 Create Table StateMeasures(     State CHAR(2) PRIMARY KEY,
 				S_HBIPS_2_Measure_Description VARCHAR(500),
 				S_HBIPS_2_Overall_Rate_Per_1000 numeric,
@@ -162,5 +163,6 @@ Create Table StateMeasures(     State CHAR(2) PRIMARY KEY,
 				S_Flu_Season_Start_Date date,	
 				S_Flu_Season_End_Date date);
 
-\copy StateMeasures FROM 'C:/Users/Shruti Jadon/Desktop/DatabaseProject/CreateDatabase/SP.csv' DELIMITER ',' CSV	
+\copy StateMeasures FROM './SP.csv' DELIMITER ',' CSV	
+*/
 	
