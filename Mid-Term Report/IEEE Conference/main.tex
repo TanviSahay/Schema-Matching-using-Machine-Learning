@@ -430,112 +430,134 @@ In this project, we deal with the problem of matching schema of different tables
 
 
 \section{Introduction}
-Schema matching is one of the key stepping stones for performing data integration and automatic this task has been a topic of research for several years. In simpe terms, schema matching can be explained as follows: Given two databases $X(x_1, x_2, x_3)$ and $Y(y_1, y_2, y_3)$ with $x_n$ and $y_n$ representing their attributes resepectively, we match a schema attribute to another either if it is semantically similar or if it represents the same data. Consider Figure 1 which contains two schemas: \textit{Student} and \textit{Grad-Student}.
-\begin{figure}
+Schema matching is one of the key stepping stones for performing data integration and automatic this task has been a topic of research for several years. In simpe terms, schema matching can be explained as follows: Given two databases $X(x_1, x_2, x_3)$ and $Y(y_1, y_2, y_3)$ with $x_n$ and $y_n$ representing their attributes resepectively, we match a schema attribute to another either if it is semantically similar or if it represents the same data. Consider the Tables \ref{students} and \ref{grad-students}. Here, Schema Matching would match SSN with ID (both unique identifiers) and Major with Maj\_Stream (both Student Majors). 
 
-\end{figure}
-%\subsection{Subsection Heading Here}
-%\blindtext
+\begin{table}[h]
+\centering
+\caption{Students}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+FName & LName & SSN & Major & Address\\
+\hline \hline
+Shruti & Jadon & 123-aaa-aaaa & Computer Science & 1xx Brit Mnr\\
+Ankita & Mehta & 234-bbb-bbbb & Mathematics & 2xx Boulders\\
+Tanvi & Sahay & 456-ccc-cccc & Political Science & 3xx N Pleasant St\\
+\hline
+\end{tabular}
+\label{students}
+\end{table}
 
-% needed in second column of first page if using \IEEEpubid
-%\IEEEpubidadjcol
+\begin{table}[h]
+\centering
+\caption{Grad-Students}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Name & ID & Maj\_Stream & House No & St name\\
+\hline \hline
+Shruti Jadon & 123aaa & CompSci & 1xx & Brit Mnr\\
+Ankita Mehta & 23bbb4 & Math and Stats & 2xx & Boulders\\
+Tanvi Sahay & 45cccc & PoliSci & 3xx & N Pleasant St\\
+\hline
+\end{tabular}
+\label{grad-students}
+\end{table}
 
-% An example of a floating figure using the graphicx package.
-% Note that \label must occur AFTER (or within) \caption.
-% For figures, \caption should occur after the \includegraphics.
-% Note that IEEEtran v1.7 and later has special internal code that
-% is designed to preserve the operation of \label within \caption
-% even when the captionsoff option is in effect. However, because
-% of issues like this, it may be the safest practice to put all your
-% \label just after \caption rather than within \caption{}.
-%
-% Reminder: the "draftcls" or "draftclsnofoot", not "draft", class
-% option should be used if it is desired that the figures are to be
-% displayed while in draft mode.
-%
-%\begin{figure}[!t]
-%\centering
-%\includegraphics[width=2.5in]{myfigure}
-% where an .eps filename suffix will be assumed under latex, 
-% and a .pdf suffix will be assumed for pdflatex; or what has been declared
-% via \DeclareGraphicsExtensions.
-%\caption{Simulation Results}
-%\label{fig_sim}
-%\end{figure}
+\noindent
+Intutively, there are several issues to be dealt with before schemas can be accurately matched with each other. Consider the examples above. The first two columns of Table \ref{students} matche with the first column of Table \ref{grad-students}, while the last column of table \ref{students} matches with the last two of table \ref{grad-students}. Similarly, basic semantic matching of attribute names cannot match terms like SSN and ID together. One method to overcome this can be creation of a dictionary to hold such mappings and simply query the dictionary everytime an entry like this occurs. However, even with such mappings, it is almost impossible to capture all such possible similarities. Also, since language itself is dynamic, maintaining a dictionary of this sort would be space as well as time intensive and will require constant manual supervision. 
 
-% Note that IEEE typically puts floats only at the top, even when this
-% results in a large percentage of a column being occupied by floats.
+In the past, reseach has been done on automating schema matching between different tables using graph based as well neural network based approach. These methods have considered using the content of each column and other attribute features as the recognition metric in addition to the name of the attribute itself. A detailed explanatino of these methods will be given in the next section. However, none of these methods solve the case of many to one or one to many attribute matching using machine learning techniques. 
 
-
-% An example of a double column floating figure using two subfigures.
-% (The subfig.sty package must be loaded for this to work.)
-% The subfigure \label commands are set within each subfloat command, the
-% \label for the overall figure must come after \caption.
-% \hfil must be used as a separator to get equal spacing.
-% The subfigure.sty package works much the same way, except \subfigure is
-% used instead of \subfloat.
-%
-%\begin{figure*}[!t]
-%\centerline{\subfloat[Case I]\includegraphics[width=2.5in]{subfigcase1}%
-%\label{fig_first_case}}
-%\hfil
-%\subfloat[Case II]{\includegraphics[width=2.5in]{subfigcase2}%
-%\label{fig_second_case}}}
-%\caption{Simulation results}
-%\label{fig_sim}
-%\end{figure*}
-%
-% Note that often IEEE papers with subfigures do not employ subfigure
-% captions (using the optional argument to \subfloat), but instead will
-% reference/describe all of them (a), (b), etc., within the main caption.
-
-
-% An example of a floating table. Note that, for IEEE style tables, the 
-% \caption command should come BEFORE the table. Table text will default to
-% \footnotesize as IEEE normally uses this smaller font for tables.
-% The \label must come after \caption as always.
-%
-%\begin{table}[!t]
-%% increase table row spacing, adjust to taste
-%\renewcommand{\arraystretch}{1.3}
-% if using array.sty, it might be a good idea to tweak the value of
-% \extrarowheight as needed to properly center the text within the cells
-%\caption{An Example of a Table}
-%\label{table_example}
-%\centering
-%% Some packages, such as MDW tools, offer better commands for making tables
-%% than the plain LaTeX2e tabular which is used here.
-%\begin{tabular}{|c||c|}
-%\hline
-%One & Two\\
-%\hline
-%Three & Four\\
-%\hline
-%\end{tabular}
-%\end{table}
-
-
-% Note that IEEE does not put floats in the very first column - or typically
-% anywhere on the first page for that matter. Also, in-text middle ("here")
-% positioning is not used. Most IEEE journals use top floats exclusively.
-% Note that, LaTeX2e, unlike IEEE journals, places footnotes above bottom
-% floats. This can be corrected via the \fnbelowfloat command of the
-% stfloats package.
-
+In this project, we propose a preliminary way of adding many to one mapping to the already present methods of one to one mapping using machine learning techniques such as self organizing maps and neural networks. This report covers the implementation of self-organizing maps to perform one to one matching and compares the performance with manual matching. Section 2 provides brief descriptions of the previous work while section 3 describes the features extracted for each attribute. Section 4 explains the methodology and technique used for performing attribute matching and section 5 details the experiemntation carried out and results obtained.
 
 
 \section{Related Work}
-\blindtext
+In this section, we briefly present the previous work associated with Schema Matching and how it associates with our current approach.
+\subsection{\textbf{Semantic Integration in Heterogenous Databases using Neural Networks}}
+This paper discusses a method of schema matching that employs neural networks in order to learn which subset of attributes of a database A can an attribute of the database B belong to and what their percentage of similarity is. Features of each column are extracted using a database specific parser and these features, represented as vectors with each value lying in the range (0,1) are used as identifiers for that column and they are clustered together using a self organizing map. Then cluster centers are calculated and a single hidden layer neural network with M outputs neurons (M = number of clusters) is trained with output as the similarity percentage of the attribute with each cluster.
+
+While this method, known as SemaInt, provides the user with a similarity mapping of each attribute in one schema with a set of attributes in another, it does not take into account the fact one might map to a set of others as well.
+\subsection{\textbf{Reconciling Schemas of Disparate Data Sources: A Machine Learning Approach}}
+The authors in the paper have explicated the need of companies to uniformly access multiple sources of data together. This paper solves the schema matching problem using
+LSD (Learning Source Description) approach which is nothing but an extension of the Machine Learning
+classification problem. It has two phases: Training Phase and Matching Phase. In the Training phase,
+firstly, the authors manually specify schema mappings (i.e. provide labels to the schema) for some sources
+and extract some of their data. Then they train the two base learners: Nave Bayes and Name Matcher
+using the extracted data and the labels assigned manually. After training, cross-validation approach is
+used and each learner is given a weight. In the matching phase, the match of each remaining data using
+the trained base learners is found and predictions from both learners are then combined into a single
+prediction using the weights calculated in the training phase. This whole approach is constrained only
+for one to one mappings. It differs from SemaInt in that authors are manually matching a subset of the
+schemasand using this information to train their systems, as opposed to extracting descriptive features
+for each attribute.
+One of the major drawbacks of this approach is again that the possibility of one attribute mapping
+to a set of attributes has not been considered. Also, a large dataset is required to perform the necessary
+training of the classifiers.
+\subsection{\textbf{Database Schema Matching Using Machine Learning with Feature Selection}}
+This paper is discussing about a tool called Automatch for automating the schema matching process. It
+matches each attribute of one client to another client schema. It uses feature selection to determine what
+attributes of the global dictionary will be more relevant to a given schema. This approach consists of a
+dictionary which is created by using schema examples and tuned by domain experts. Dictionary includes
+various clusters of attributes say R1, R2, R3 etc. It compares attributes of one schema (S1, S2, S3etc)
+with each of the dictionary attributes (R1, R2, R3 etc) and assign a weight based on probability formula
+of symmetry. The same is repeated with another schema and a path from schema 1 to schema 2 via
+the dictionary is chosen. The Minimum Weight Path determines which attribute of schema 1 is closely
+aligned with which schema 2 attribute.
+
+While this method improves on its predecessors by including one-to-one attribute matching rather
+than just matching one attribute with a set of possible attributes, it still has the same problem that it
+does not consider the possibility of one attribute matching to a set of attributes.\\
+
+\noindent
+While all three of these papers present different methods of solving schema matching using a machine learning technique, none of them take into consideration the one-to-many matching scenario. Other papers, such as CUPID solve this problem, however they do not make use of machine learning, which is why they have not been considered here.
 
 \section{Feature Extraction}
-Shruti gave it already, I think.
+For each attributes, 17 hand made features were extracted and used as their descriptors for all future training. The features were divided into three categories: specific to numeric values, specific to character values and common to both. The features extracted were:\\
+
+For Num Values
+\begin{itemize}
+\item Average: Average of Specific Attribute values
+\item Variance: Variance of Attribute Entries
+\item Coefficient of Variance: Coefficient of Variance of Attribute Entries
+\item Minimum: Minimum of Attribute values
+\item Maximum: Maximum of Attribute Values
+\end{itemize}
+
+For Text/Char Values
+\begin{itemize}
+\item Number to All: It calculates the Number of numeric values to Used Length
+\item Character to All: It calculates the Number of character values to used length
+\item Special Characters to All: It calculates the Number of Special Characters Values to Used Length
+\item White Space to All: It is ratio of the Number of Space to Used  Length
+\end{itemize}
+
+Common to both
+\begin{itemize}
+\item Type: if Type is INT then set to 0 , Numeric to 1, Text 3, Varchar to 4 etc
+\item Length: Length of the datatype defined.
+\item Key: If the given attribute is a Primary Key or Foreign Key or not[ 0 for no 1 for yes]
+\item Unique: if the given attribute has Unique Property.
+\item Not Null: if the given attribute has constraint of Not Null.
+\item Average Used Length: It is summation of used length to total length allocated.
+\item Variance of Length: It is variance of Used Length array.
+\item Variance Coefficient: It is Coefficient of variance for Used Length array.
+\end{itemize}
+
+For each attribute, all of these 17 features will be extracted and the resultant feature vector will act as the list of values that represent the particular attribute.
 
 \section{One to One Schema Matching}
-\blindtext
+
 
 \subsection{Kohonen Self Organizing Maps}
-Theory of SOM and how it was implemented. Image of the network might be good.
+Kohonen Self-Organizing Maps is a type of Artificial Neural Network which is trained using unsupervised learning method in such a way that similar patterns are clustered together in the input data.
+In this technique, when an input data activates a neuron then weight of activated neuron as well as the adjacent neurons are updated over the various iterations. Therefore, SOM forms a semantic map where similar samples are mapped closed to each other and dissimilar ones get apart.
+Figure \ref{SOM} shows a self-organizing map network architecture with an input layer having N nodes and an output layer having M nodes. Here N is the size of feature vector of each input and M are the number of clusters to which that input data is mapped and $W_{ij}$ is the weight vector assigned to the neurons over the iterations.
 
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.4]{1.jpeg}
+\caption{Self-Organizing Map Architecture}
+\label{SOM}
+\end{figure}
 \subsection{Multilayer Perceptron}
 This section only if we decide to do this finally.
 

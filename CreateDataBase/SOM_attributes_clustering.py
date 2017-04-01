@@ -4,17 +4,18 @@ import pickle
 from scipy.spatial import distance
 
 #Training Data
-dataFeaturePath = '../Codes/DataFeatures.pickle'
+dataFeaturePath = '../FeatureVectorResults/DataFeatures_Train.pickle'
 DataFeatures = pickle.load(open(dataFeaturePath, 'rb'))
 
 #Test Data
-testFeaturesPath = '../Codes/DataFeatures_Match.pickle'
+testFeaturesPath = '../FeatureVectorResults/DataFeatures_Match.pickle'
 TestFeatures = pickle.load(open(testFeaturesPath,'rb'))
 
 #List of all features in training data
 Features = []
 for val in DataFeatures.values():
     Features.append(val)
+
 
 #List of all features in test data
 testFeatures = []
@@ -23,7 +24,7 @@ for val in TestFeatures.values():
 
 #(x,y) -- size of output grid for SOM
 x = 5
-y = 3
+y = 2
 #Number of iterations to run
 iteration = input("Input number of iterations: ")
 
@@ -45,7 +46,7 @@ for i in range(x):
 
 #Open a csv file to write the attribute name and its corresponding cluster id
 #print 'attribute			Spatial Position'
-out_file_path = '../Codes/AttributeCluster_centroid_'+ str(x*y) + '_itr' + str(iteration) + '.csv'
+out_file_path = '../FeatureVectorResults/AttributeCluster_centroid_'+ str(x*y) + '_itr' + str(iteration) + '.csv'
 out_file = open(out_file_path,'w')
 output_file = csv.writer(out_file, delimiter = ',')
 output_file.writerow(["Attribute", "Cluster ID"])
@@ -65,7 +66,7 @@ for k in DataFeatures.keys():
 out_file.close()
 
 #Open the output file for test data clusters
-out_file_path_test = '../Codes/TestCluster_centroid_'+ str(x*y) + '_itr' + str(iteration) +'.csv'
+out_file_path_test = '../FeatureVectorResults/TestCluster_centroid_'+ str(x*y) + '_itr' + str(iteration) +'.csv'
 out_file = open(out_file_path_test,'w')
 output_file = csv.writer(out_file, delimiter = ',')
 output_file.writerow(["Attribute", "Cluster ID"])
