@@ -124,6 +124,8 @@ class MiniSom(object):
         for iteration in range(num_iteration):
             rand_i = self.random_generator.randint(len(data)) # pick a random sample
             self.update(data[rand_i], self.winner(data[rand_i]), iteration)
+        
+        return self.weights    
 
     def train_batch(self, data, num_iteration):
         """ Trains using all the vectors in data sequentially """
