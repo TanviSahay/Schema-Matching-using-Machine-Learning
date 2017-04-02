@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>dc.js - Series Example</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dc/2.1.3/dc.css"/>
+</head>
+<body>
+
+<div class="container">
+<script type="text/javascript" src="header.js"></script>
+<div id = "wrap">
+<div id="test1"><h5>Visualisation using SOM clustering </h5></div>
+</div>
+
+<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.12/crossfilter.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dc/2.1.3/dc.js"></script>
+<script type="text/javascript">
+var serieschart = dc.seriesChart("#test1");
+d3.csv("./Training_vis.csv" + "?", function(error, data) {
+
+data.forEach(function(d) { d['Dim_x'] = +d['Dim_x']; 
+                            d['Dim_y'] = +d['Dim_y'];
+                            d['Cluster ID'] = +d['Cluster ID'];}); 
+
+
+  ndx = crossfilter(data);
+  seriesDim   = ndx.dimension(function(d) {return [d['Cluster ID'],+d['Dim_x'],+d['Dim_y'],d['Attribute']];}),
+  seriesGroup = seriesDim.group();
+ 
+
+ var domain = data.map(function (d) {return +d['Dim_x']; });	
+ var domy = data.map(function (d) {return +d['Dim_y']; });	
+		
+		minimum = d3.min(domain);
+		maximum = d3.max(domain); 
+		
+console.log(minimum,maximum)		;
+		miny = d3.min(domy);
+		maxy = d3.max(domy);   
+		
+console.log(miny,maxy)		;
+
+  var symbolScale = d3.scale.ordinal().range(d3.svg.symbolTypes);
+  		var symbolAccessor = function(d) { return symbolScale(d.key[0]); };
+  
+      var subChart = function(c) {
+    return dc.scatterPlot(c)
+       .symbol('circle')
+        .symbolSize(8)
+        .highlightedSize(10)
+  		};
+           
+  serieschart
+    .width(500)
+    .height(350)
+    .chart(subChart)
+    .x(d3.scale.linear().domain([minimum,maximum]))
+    .y(d3.scale.linear().domain([miny,maxy]))
+    .brushOn(false)
+    .xAxisLabel('Dimensionality 1')
+    .yAxisLabel('Dimensionality 2')
+    .clipPadding(10)
+    .elasticY(true)
+    .dimension(seriesDim)
+    .group(seriesGroup)
+    .mouseZoomable(false)
+    .title(function(d) {
+        	return 'Dim_x' +  ": "  + d.key[1] + "\n" +
+               'Dim_y' + ": " + d.key[2] + "\n"+
+               'Attribute :' + d.key[3] ;})
+    .shareTitle(true) // allow default scatter title to work
+    .seriesAccessor(function(d) {return d.key[0];})
+    .keyAccessor(function(d) {return +d.key[1];})
+    .valueAccessor(function(d) {return +d.key[2];})
+    .legend(dc.legend().x(350).y(20).itemHeight(13).gap(5).horizontal(1).legendWidth(140).itemWidth(70));
+  dc.renderAll();
+});
+
+</script>
+</div>
+</body>
+</html>
+
