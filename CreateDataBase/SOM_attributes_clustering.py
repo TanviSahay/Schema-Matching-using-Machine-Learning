@@ -23,8 +23,8 @@ for val in TestFeatures.values():
     testFeatures.append(val)
 
 #(x,y) -- size of output grid for SOM
-x = 5
-y = 2
+x = 7
+y = 7
 #Number of iterations to run
 iteration = input("Input number of iterations: ")
 

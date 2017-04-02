@@ -404,7 +404,6 @@
 
 
 \begin{abstract}
-%\boldmath
 In this project, we deal with the problem of matching schema of different tables across databases with each other with the help of certain machine learning algorithms. This is done in order to recognize which attributes contain the same or similar values and might map to each other in case the two databases are to be used in unison. We also tackle the challenge of a single attribute mapping to multiple attributes along with the case of basic one-to-one mapping. For this report, one to one mapping using Kohonen Self-Organizing Maps and Multilayer Perceptrons has been explained and experiments carried out have been presented. 
 \end{abstract}
 % IEEEtran.cls defaults to using nonbold math in the Abstract.
@@ -545,12 +544,11 @@ Common to both
 For each attribute, all of these 17 features will be extracted and the resultant feature vector will act as the list of values that represent the particular attribute.
 
 \section{One to One Schema Matching}
-
+For one to one schema matching, we applied the same methodology follwed by the authors of SemaInt. After extraction of features from each attribute, we prepared a self-organizing map to cluster attributes within the same database such that attributes containing similar data (such as SSN and Employee ID) will be clustered together. A short summary of self-organizing maps has been given below:
 
 \subsection{Kohonen Self Organizing Maps}
-Kohonen Self-Organizing Maps is a type of Artificial Neural Network which is trained using unsupervised learning method in such a way that similar patterns are clustered together in the input data.
-In this technique, when an input data activates a neuron then weight of activated neuron as well as the adjacent neurons are updated over the various iterations. Therefore, SOM forms a semantic map where similar samples are mapped closed to each other and dissimilar ones get apart.
-Figure \ref{SOM} shows a self-organizing map network architecture with an input layer having N nodes and an output layer having M nodes. Here N is the size of feature vector of each input and M are the number of clusters to which that input data is mapped and $W_{ij}$ is the weight vector assigned to the neurons over the iterations.
+A Kohonen Self-Organizing Map is a type of Artificial Neural Network which is trained using unsupervised learning method in such a way that similar patterns in the input data are clustered together. A general architecture of the map has been shown in Figure \ref{SOM}, with the input layer having N nodes and the output layer having M nodes. Each output neuron is connected with every neuron in the input layer and each connection has a weight associated with it. 
+For each input feature, a single output neuron is fired such that the weight vector associated with this neuron is closest to that input vector. Weights of all neurons near this activated neuron, including its own, are updated in such a way that it brings them closer to the input feature vector. Over several iterations, these weights are learned by the network and for any new input, the neuron with the weight vector closest to it is chosen as its class.
 
 \begin{figure}[h]
 \centering
@@ -558,8 +556,8 @@ Figure \ref{SOM} shows a self-organizing map network architecture with an input 
 \caption{Self-Organizing Map Architecture}
 \label{SOM}
 \end{figure}
-\subsection{Multilayer Perceptron}
-This section only if we decide to do this finally.
+
+In our implementation, the input provided to SOM was a size 17 feature vector with number of examples equal to number of tuples in the training database. 
 
 \section{Experimentation}
 
@@ -569,10 +567,13 @@ We might need to hand label the attributes as a base line to check the accuracy 
 \subsection{Results}
 Clustering accuracy table, scatter plots etc.
 
-\section{Limitations}
-No many to one mapping and anything else you can think of.
+\section{Limitations and Future Work}
+The work done till now has several limitations which we will try to overcome in the next phase of the project. Firstly, we have not yet considered matching a test attribute to a single train attribute. Instead, we are simply providing a cluster identity to the test input attribute which only tells us to which set of train attributes does our test attribute belong. Secondly, name of the attribute has not been taken into consideration yet, which may help in matching individual attributes with each other. Finally, we are yet to perform the one-to-many attribute matching. 
 
-\section{Future Work}
+The next task in the pipeline is to prepare a dictionary of possible one to many mappigs and recompute the feature vectors for each attribute accordingly. Once the new features have been calculated, the same procedure will be applied again to match a train and test database. Once each test attribute has been assigned to a cluster, the attribute will be matched with every train attribute in the corresponding cluster and one to one mapping will be assigned. For example, if a test attribute $ID$ has been assigned to a cluster $C$ that contains: ${SSN, Employee ID, Product ID}$, this attribute will be individually matched with each of the values in $C$ and the one that it is associated most closely with is returned as the final matching. Finally, we will try other clustering algorithms and try other methodologies and test how they perform with the same task to improve the accuracy of our system.
+
+
+
 % if have a single appendix:
 %\appendix[Proof of the Zonklar Equations]
 % or
