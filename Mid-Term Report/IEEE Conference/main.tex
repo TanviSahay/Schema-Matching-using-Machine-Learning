@@ -343,7 +343,7 @@
 % There should be no need to do such things with IEEEtran.cls V1.6 and later.
 % (Unless specifically asked to do so by the journal or conference you plan
 % to submit to, of course. )
-
+\usepackage{hyperref}
 
 % correct bad hyphenation here
 \hyphenation{op-tical net-works semi-conduc-tor}
@@ -355,17 +355,18 @@
 % can use linebreaks \\ within to get better formatting as desired
 \title{Schema Matching using Machine Learning}
 
-
 % author names and affiliations
 % use a multiple column layout for up to three different
 % affiliations
 
-
-\author{\IEEEauthorblockN{Ankita Mehta}
+\author{\IEEEauthorblockN{Ankita Mehta\\
+amehta@cs.umass.edu}
 \and
-\IEEEauthorblockN{Shruti Jadon}
+\IEEEauthorblockN{Shruti Jadon\\
+sjadon@cs.umass.edu}
 \and
-\IEEEauthorblockN{Tanvi Sahay}
+\IEEEauthorblockN{Tanvi Sahay\\
+tsahay@cs.umass.edu}
 }
 
 % conference papers do not typically use \thanks and this command
@@ -404,7 +405,7 @@
 
 
 \begin{abstract}
-In this project, we deal with the problem of matching schema of different tables across databases with each other with the help of certain machine learning algorithms. This is done in order to recognize which attributes contain the same or similar values and might map to each other in case the two databases are to be used in unison. We also tackle the challenge of a single attribute mapping to multiple attributes along with the case of basic one-to-one mapping. For this report, one to one mapping using Kohonen Self-Organizing Maps and Multilayer Perceptrons has been explained and experiments carried out have been presented. 
+In this project, we deal with the problem of matching schema of different tables across databases with each other with the help of certain machine learning algorithms. This is done in order to recognize which attributes contain the same or similar values and might map to each other in case the two databases are to be used in unison. We also tackle the challenge of a single attribute mapping to multiple attributes along with the case of basic one-to-one mapping. For this report, one to one mapping using Kohonen Self-Organizing Maps has been explained and experiments carried out have been presented. 
 \end{abstract}
 % IEEEtran.cls defaults to using nonbold math in the Abstract.
 % This preserves the distinction between vectors and scalars. However,
@@ -429,7 +430,7 @@ In this project, we deal with the problem of matching schema of different tables
 
 
 \section{Introduction}
-Schema matching is one of the key stepping stones for performing data integration and automatic this task has been a topic of research for several years. In simpe terms, schema matching can be explained as follows: Given two databases $X(x_1, x_2, x_3)$ and $Y(y_1, y_2, y_3)$ with $x_n$ and $y_n$ representing their attributes resepectively, we match a schema attribute to another either if it is semantically similar or if it represents the same data. Consider the Tables \ref{students} and \ref{grad-students}. Here, Schema Matching would match SSN with ID (both unique identifiers) and Major with Maj\_Stream (both Student Majors). 
+Schema matching is one of the key stepping stones for performing data integration and automating this task has been a topic of research for several years. In simpe terms, schema matching can be explained as follows: Given two databases $X(x_1, x_2, x_3)$ and $Y(y_1, y_2, y_3)$ with $x_n$ and $y_n$ representing their attributes resepectively, we match a schema attribute to another either if it is semantically similar or if it represents the same data. Consider the Tables \ref{students} and \ref{grad-students}. Here, Schema Matching would match SSN with ID (both unique identifiers) and Major with Maj\_Stream (both Student Majors). 
 
 \begin{table}[h]
 \centering
@@ -462,20 +463,20 @@ Tanvi Sahay & 45cccc & PoliSci & 3xx & N Pleasant St\\
 \end{table}
 
 \noindent
-Intutively, there are several issues to be dealt with before schemas can be accurately matched with each other. Consider the examples above. The first two columns of Table \ref{students} matche with the first column of Table \ref{grad-students}, while the last column of table \ref{students} matches with the last two of table \ref{grad-students}. Similarly, basic semantic matching of attribute names cannot match terms like SSN and ID together. One method to overcome this can be creation of a dictionary to hold such mappings and simply query the dictionary everytime an entry like this occurs. However, even with such mappings, it is almost impossible to capture all such possible similarities. Also, since language itself is dynamic, maintaining a dictionary of this sort would be space as well as time intensive and will require constant manual supervision. 
+Intutively, there are several issues to be dealt with before schemas can be accurately matched with each other. Consider the examples above. The first two columns of Table \ref{students} matches with the first column of Table \ref{grad-students}, while the last column of table \ref{students} matches with the last two of table \ref{grad-students}. Similarly, basic semantic matching of attribute names cannot match terms like SSN and ID together. One method to overcome this can be creation of a dictionary to hold such mappings and simply query the dictionary everytime an entry like this occurs. However, even with such mappings, it is almost impossible to capture all such possible similarities. Also, since language itself is dynamic, maintaining a dictionary of this sort would be space as well as time intensive and will require constant manual supervision. 
 
-In the past, reseach has been done on automating schema matching between different tables using graph based as well neural network based approach. These methods have considered using the content of each column and other attribute features as the recognition metric in addition to the name of the attribute itself. A detailed explanatino of these methods will be given in the next section. However, none of these methods solve the case of many to one or one to many attribute matching using machine learning techniques. 
+In the past, reseach has been done on automating schema matching between different tables using graph based as well neural network based approach. These methods have considered using the content of each column and other attribute features as the recognition metric in addition to the name of the attribute itself. A detailed explanation of these methods will be given in the next section. However, none of these methods solve the case of many to one or one to many attribute matching using machine learning techniques. 
 
-In this project, we propose a preliminary way of adding many to one mapping to the already present methods of one to one mapping using machine learning techniques such as self organizing maps and neural networks. This report covers the implementation of self-organizing maps to perform one to one matching and compares the performance with manual matching. Section 2 provides brief descriptions of the previous work while section 3 describes the features extracted for each attribute. Section 4 explains the methodology and technique used for performing attribute matching and section 5 details the experiemntation carried out and results obtained.
+In this project, we propose a preliminary way of adding many to one mapping to the already present methods of one to one mapping using machine learning techniques such as self organizing maps and neural networks. This report covers the implementation of self-organizing maps to perform one to one matching and compares the performance with manual matching. Section 2 provides brief descriptions of the previous work while section 3 describes the features extracted for each attribute. Section 4 explains one to one schema matching while sections 5 explains the experimentation carried out. Finally, section 6 describes the results and observations followed by a description of future work to be carried out in section 7.
 
 
 \section{Related Work}
 In this section, we briefly present the previous work associated with Schema Matching and how it associates with our current approach.
-\subsection{\textbf{Semantic Integration in Heterogenous Databases using Neural Networks}}
+\subsection{\textbf{Semantic Integration in Heterogenous Databases using Neural Networks}\cite{ref1}}
 This paper discusses a method of schema matching that employs neural networks in order to learn which subset of attributes of a database A can an attribute of the database B belong to and what their percentage of similarity is. Features of each column are extracted using a database specific parser and these features, represented as vectors with each value lying in the range (0,1) are used as identifiers for that column and they are clustered together using a self organizing map. Then cluster centers are calculated and a single hidden layer neural network with M outputs neurons (M = number of clusters) is trained with output as the similarity percentage of the attribute with each cluster.
 
 While this method, known as SemaInt, provides the user with a similarity mapping of each attribute in one schema with a set of attributes in another, it does not take into account the fact one might map to a set of others as well.
-\subsection{\textbf{Reconciling Schemas of Disparate Data Sources: A Machine Learning Approach}}
+\subsection{\textbf{Reconciling Schemas of Disparate Data Sources: A Machine Learning Approach}\cite{ref2}}
 The authors in the paper have explicated the need of companies to uniformly access multiple sources of data together. This paper solves the schema matching problem using
 LSD (Learning Source Description) approach which is nothing but an extension of the Machine Learning
 classification problem. It has two phases: Training Phase and Matching Phase. In the Training phase,
@@ -491,7 +492,7 @@ for each attribute.
 One of the major drawbacks of this approach is again that the possibility of one attribute mapping
 to a set of attributes has not been considered. Also, a large dataset is required to perform the necessary
 training of the classifiers.
-\subsection{\textbf{Database Schema Matching Using Machine Learning with Feature Selection}}
+\subsection{\textbf{Database Schema Matching Using Machine Learning with Feature Selection}\cite{ref3}}
 This paper is discussing about a tool called Automatch for automating the schema matching process. It
 matches each attribute of one client to another client schema. It uses feature selection to determine what
 attributes of the global dictionary will be more relevant to a given schema. This approach consists of a
@@ -507,10 +508,23 @@ than just matching one attribute with a set of possible attributes, it still has
 does not consider the possibility of one attribute matching to a set of attributes.\\
 
 \noindent
-While all three of these papers present different methods of solving schema matching using a machine learning technique, none of them take into consideration the one-to-many matching scenario. Other papers, such as CUPID solve this problem, however they do not make use of machine learning, which is why they have not been considered here.
+While all three of these papers present different methods of solving schema matching using a machine learning technique, none of them take into consideration the one-to-many matching scenario. Other papers, such as CUPID\cite{ref4} solve this problem, however they do not make use of machine learning, which is why they have not been considered here.
 
 \section{Feature Extraction}
 For each attributes, 17 hand made features were extracted and used as their descriptors for all future training. The features were divided into three categories: specific to numeric values, specific to character values and common to both. The features extracted were:\\
+
+\vspace{3cm}
+Common to both
+\begin{itemize}
+\item Type: if Type is INT then set to 0 , Numeric to 1, Text 3, Varchar to 4 etc
+\item Length: Length of the datatype defined.
+\item Key: If the given attribute is a Primary Key or Foreign Key or not[ 0 for no 1 for yes]
+\item Unique: if the given attribute has Unique Property.
+\item Not Null: if the given attribute has constraint of Not Null.
+\item Average Used Length: It is summation of used length to total length allocated.
+\item Variance of Length: It is variance of Used Length array.
+\item Variance Coefficient: It is Coefficient of variance for Used Length array.
+\end{itemize}
 
 For Num Values
 \begin{itemize}
@@ -529,24 +543,12 @@ For Text/Char Values
 \item White Space to All: It is ratio of the Number of Space to Used  Length
 \end{itemize}
 
-Common to both
-\begin{itemize}
-\item Type: if Type is INT then set to 0 , Numeric to 1, Text 3, Varchar to 4 etc
-\item Length: Length of the datatype defined.
-\item Key: If the given attribute is a Primary Key or Foreign Key or not[ 0 for no 1 for yes]
-\item Unique: if the given attribute has Unique Property.
-\item Not Null: if the given attribute has constraint of Not Null.
-\item Average Used Length: It is summation of used length to total length allocated.
-\item Variance of Length: It is variance of Used Length array.
-\item Variance Coefficient: It is Coefficient of variance for Used Length array.
-\end{itemize}
-
 For each attribute, all of these 17 features will be extracted and the resultant feature vector will act as the list of values that represent the particular attribute.
 
 \section{One to One Schema Matching}
-For one to one schema matching, we applied the same methodology follwed by the authors of SemaInt. After extraction of features from each attribute, we prepared a self-organizing map to cluster attributes within the same database such that attributes containing similar data (such as SSN and Employee ID) will be clustered together. A short summary of self-organizing maps has been given below:
+For one to one schema matching, we applied the same methodology follwed by the authors of SemaInt. After extraction of features from each attribute, we prepared a self-organizing map to cluster attributes within the same database such that attributes containing similar data (such as SSN and Employee ID) will be clustered together. After preparation of this model, attributes from the test set were matched with the prepared clusters. Here, it has been assumed that each attribute in the test set will map to at least one attribute in the training set. A short summary of self-organizing maps has been given below:
 
-\subsection{Kohonen Self Organizing Maps}
+\subsection{Kohonen Self Organizing Maps \cite{SOM}}
 A Kohonen Self-Organizing Map is a type of Artificial Neural Network which is trained using unsupervised learning method in such a way that similar patterns in the input data are clustered together. A general architecture of the map has been shown in Figure \ref{SOM}, with the input layer having N nodes and the output layer having M nodes. Each output neuron is connected with every neuron in the input layer and each connection has a weight associated with it. 
 For each input feature, a single output neuron is fired such that the weight vector associated with this neuron is closest to that input vector. Weights of all neurons near this activated neuron, including its own, are updated in such a way that it brings them closer to the input feature vector. Over several iterations, these weights are learned by the network and for any new input, the neuron with the weight vector closest to it is chosen as its class.
 
@@ -560,12 +562,153 @@ For each input feature, a single output neuron is fired such that the weight vec
 In our implementation, the input provided to SOM was a size 17 feature vector with number of examples equal to number of tuples in the training database. 
 
 \section{Experimentation}
-
 \subsection{Dataset}
-\subsection{Data Labelling}
-We might need to hand label the attributes as a base line to check the accuracy of out system.
-\subsection{Results}
-Clustering accuracy table, scatter plots etc.
+Before explaining the experiments carried out, we describe the dataset used for the purpose of this project. The dataset is from the medical domain and contains tables for Hospital Comparisons. We have used two data tables for our project: One is the Hospital Level table, which contains data from several hospitals and the other is the State Level table, which contains a single hospital for every state in the US. Excerpts of both are given in Table \ref{HTable} and Table \ref{STable}. The first table contains 85 different attributes and 1645 instances of data while the second one has 74 attributes and 52 data tuples. 
+
+\begin{table}[h]
+\centering
+\caption{Hospital Level Table}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Hospital\_Name & Start\_Date & TOB-1\_$\%$ & Hie\_Measure\_Description\\
+\hline \hline
+Dale Medical Center & 01$\setminus$01$\setminus$2015 & 73.47 $\%$ & yes\\
+\hline
+Citizens BMC & 01$\setminus$01$\setminus$2015 & 68.75 $\%$ & yes\\
+\hline
+Shoals Hospital & 01$\setminus$01$\setminus$2015 & 67.24 $\%$ & no\\
+\hline
+St. Mary's Hospital  & 01$\setminus$01$\setminus$2015 & 30.58 $\%$ & yes\\
+\hline
+\end{tabular}
+\label{HTable}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{State Level Table}
+\begin{tabular}{|c|c|c|c|}
+\hline
+State & Start\_Date & S\_TOB\_1\_Den & S\_Hie\_Yes\_Count\\
+\hline \hline
+AL & 01$\setminus$01$\setminus$2015 & 1286 & 0 \\
+\hline
+AR & 01$\setminus$01$\setminus$2015 & 13981 & 17 \\
+\hline
+CA & 01$\setminus$01$\setminus$2015 & 7623 & 10 \\
+\hline
+AZ & 01$\setminus$01$\setminus$2015 & 46624 & 30 \\
+\hline
+
+\end{tabular}
+\label{STable}
+\end{table}
+
+Models have been trained using Table \ref{HTable} and tested over Table \ref{STable}. As can be seen, Table \ref{HTable} contains attributes that do not occur in Table \ref{STable} and vice-versa. Certain attributes in the tables can be mapped directly to each other, such as $Start\_Date$ and $State$ while others such as $Hie\_Measure\_Description$ and $S\_Hie\_Yes\_Count$, which might semantically appear to be similar contain very different data and hence should not be matched with each other.Therefore, Semantic similarity is not sufficient for schema matching. More detailed description of the downloaded dataset can be found here: \url{https://data.medicare.gov/data/hospital-compare}.
+
+\subsection{Pre-processing}
+Before beginning the experimentation, data as well the schema was cleaned in order to allow proper processing of the tuples. The following cleaning steps were undertaken.
+\begin{itemize}
+\item Schema names were cleaned to convert symbols such as $\%$ to words like $Percent$ to allow uniformity across schema. 
+\item Certain numeric data columns had values such as "Not Available" in them. All of these were converted to 0 to allow the data type to be numeric which in turn let us compute all statistical properties for these columns. Without changing this, the data type would have been VARCHAR, which would have resulted in loss of information.
+\item The $\%$ symbol was also removed from all numeric columns for the same reason given above.
+\end{itemize}
+
+\subsection{Methodology}
+Once the data was cleaned, features for each column for both the training and testing tables were extracted.Then using Kohonen Self Organising Maps, similar features were clustered together. Examples of the extracted features and their cluster ID for training dataset can be seen in Table \ref{FV}.
+
+\begin{table}[h]
+\centering
+\caption{Attributes, Feature Vectors and corresponding clusters}
+\begin{tabular}{|c|p{5cm}|c|}
+\hline
+Attribute & Feature Vector & cluster id\\
+\hline \hline
+hospital\_name & 2, 500, 0, 0, 0, 274517.6471, 0.1392, 0.2939, 0 & 5\\
+& 0, 0, 0, 0, 0.1, 0.1057, 0.0001, 0.9999 &\\
+start\_date & 4, 4, 0, 0, 0, 773.6471, 0.0, 0.0, 0, 0, 0, 0, 0 & 5\\
+& 0.0, 0.2, 0.8, 0.2 &\\ 
+TOB-1\_$\%$ & 2, 500, 0, 0, 0, 62764.7059, 0.0035, 0.2038, 0, 0, 0, 0, 0, 0.0054, 0.3027, 0.6321, 0.3679 & 2\\
+Hie\_Measure\_Description & 2, 500, 0, 0, 0, 502870.5882, 0.0, 0.0, 0, 0, 0, 0, 0, 0.0962, 0.0962, 0.0, 1.0 & 5\\
+\hline
+\end{tabular}
+\label{FV}
+\end{table}
+
+The Self Organizing Map provides spatial coordinates of the activated neuron as output for each attribute i.e. for an attribute "State", the SOM will give an output of (2,2) corresponding to the neuron at that position in the output grid. For ease of clustering, each grid point has been mapped to a unique cluster id as: (0,0) $->$ 0, (0,1) $->$ 1 and so on.
+
+Once the model was trained, extracted feature vectors for the test set were classified into cluster using the following approaches:
+\begin{itemize}
+\item SOM - After clusters were prepared using SOM, the test feature vectors were provided as input to the network one by one and their correspoding outputs were noted. 
+\item Cluster Center Matching - For each unique cluster, the center of that cluster was computed and distance of every test attribute from these cluster centers was found. The test attribute was assigned to that cluster whose center was closest to it. 
+\end{itemize} 
+
+\section{Results and Observations}
+Experiments were perofrmed on two cluster grid sizes: 5x3 and 7x7. For grid size 15, 10 clusters were observed, out of which 5 have been shown in figure \ref{15}. For grid size 49, 28 clusters were observed, out of which 24 clusters have been shown in figure \ref{49}. The values shown are for the same attributes for different grid sizes. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.4]{grid_15.jpeg}
+\caption{Clusters for grid size 15}
+\label{15}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.4]{grid_49.jpeg}
+\caption{Clusters for grid size 49}
+\label{49}
+\end{figure}
+
+For grid size 15, table \ref{clusters} shows the clusters and attributes lying in each cluster, referred to by their attribute id, which corresponds to their position in the table. 
+
+\begin{table}[h]
+\centering
+\caption{Cluster ID and underlying attributes}
+\begin{tabular}{|l|p{5cm}|l|}
+\hline
+Cluster ID & Set of Attributes & Majority Type\\
+\hline \hline
+1 & 4, 8, 11, 13, 16, 21, 26, 31, 36, 41, 45, 49, 51, 52, 55, 57, 58, 65 , 69, 76, 81 & footnotes\\
+2 & 18, 23, 28, 33, 38, 43, 46, 62, 66, 73 & percentages \\
+3 & 19, 63, 64, 67, 68 & num/den\\
+5 & 1, 2, 3, 6, 7, 12, 17, 22, 27, 37, 42, 50, 53, 54, 56, 59, 60, 70, 71, 72, 77, 82, 83 & text data\\
+6 & 9, 14, 20, 24, 25, 29, 30, 32, 34, 35, 39, 40, 44, 47, 48, 74, 75, 79, 80 & num/den\\ 
+7 & 78 & percentage\\
+8 & 61 & long decsription\\
+9 & 10, 15 & den\\
+12 & 5 & zip code\\
+13 & 0 & provider no\\
+\hline
+\end{tabular}
+\label{clusters}
+\end{table}
+
+For test table, clustered using method 2 provided in the methodology, a subset of expected and predicted clusters has been shown in table \ref{result}.
+
+\begin{table}
+\centering
+\caption{Predicted vs Expected outcome}
+\begin{tabular}{|c|c|c|}
+\hline
+Attribute & Predicted Cluster & Expected Cluster\\
+\hline \hline
+s\_flu\_season\_start\_date	 & 2 & 5\\
+state & 2 & 1\\
+s\_peoc\_no\_percentage & 2 & 2\\
+s\_fuh\_30\_numerator & 3 & 3\\
+\hline
+\end{tabular}
+\label{result}
+\end{table}
+
+\subsection*{Observations}
+From the above results, it can be inferred that most of the attributes containing similar data have been clustered together. From figures \ref{15} and \ref{49} we can see that grid size 15 provides slightly more general results. As can be seen, for grid size 49, descriptions were divided into 6 clusters while in grid size 15, they were all included in a single cluster. Since we are going for more general results right now rather than the fine tuned ones, we decided to use the grid size 15 rather than any other value. 
+
+With the feature prepared right now, some of the attributes show similarity with others which do not contain related data. For example, at present, dates are being clustered together with descriptions, which is not desirable. To correct this, more features, namely: number of $-$s / Total Length and number of $\setminus$s / Total Length will be added. More features can also be added depending on the future performance of the model.
+
+From the table \ref{result} shown above, it can be seen that test attribute clustering was unsatisfactory. The result obtained was same for both the techniques provided in methodology. For technique 1 i.e. clustering using SOM, output classes which were not observed in the training phase were also present in the testing phase and for technique 2 i.e. distance from cluster centers, a very low percentage of test attributes were being classified properly. To correct this, other methods of assigning classes, such as nearest neighbors and neural networks, will be tested.
+
 
 \section{Limitations and Future Work}
 The work done till now has several limitations which we will try to overcome in the next phase of the project. Firstly, we have not yet considered matching a test attribute to a single train attribute. Instead, we are simply providing a cluster identity to the test input attribute which only tells us to which set of train attributes does our test attribute belong. Secondly, name of the attribute has not been taken into consideration yet, which may help in matching individual attributes with each other. Finally, we are yet to perform the one-to-many attribute matching. 
@@ -631,13 +774,9 @@ The next task in the pipeline is to prepare a dictionary of possible one to many
 % <OR> manually copy in the resultant .bbl file
 % set second argument of \begin to the number of references
 % (used to reserve space for the reference number labels box)
-\begin{thebibliography}{1}
+\bibliography{references}
+\bibliographystyle{plain}
 
-\bibitem{IEEEhowto:kopka}
-H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
-  0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
-
-\end{thebibliography}
 
 % biography section
 % 
@@ -650,9 +789,6 @@ H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
 %\begin{biography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{mshell}}]{Michael Shell}
 % or if you just want to reserve a space for a photo:
 
-\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{picture}}]{John Doe}
-\blindtext
-\end{IEEEbiography}
 
 % You can push biographies down or up by placing
 % a \vfill before or after them. The appropriate
