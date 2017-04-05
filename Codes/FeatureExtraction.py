@@ -7,6 +7,36 @@ feature_dict={}
 feature_vector=[]
 #Extract TYPE UNIQUE NULL and KEY from Database
 
+def Numberofbackslash(charAtt):
+    charAttribute="".join(str(elm) for elm in charAtt)
+    count_space=0
+    i=len(charAttribute)
+    for val in range(0,i):
+        if(charAttribute[val]=="/"):
+            count_space=count_space+1
+    ratio=count_space*1.0/i
+    return round(ratio,4)
+
+def Numberofbrackets(charAtt):
+    charAttribute="".join(str(elm) for elm in charAtt)
+    count_space=0
+    i=len(charAttribute)
+    for val in range(0,i):
+        if(charAttribute[val]=="("):
+            count_space=count_space+1
+    ratio=count_space*1.0/i
+    return round(ratio,4)
+
+def Numberofhyphen(charAtt):
+    charAttribute="".join(str(elm) for elm in charAtt)
+    count_space=0
+    i=len(charAttribute)
+    for val in range(0,i):
+        if(charAttribute[val]=="-"):
+            count_space=count_space+1
+    ratio=count_space*1.0/i
+    return round(ratio,4)
+
 def NumbertoAll(charAtt):
     charAttribute="".join(str(elm) for elm in charAtt)
     count_integer=0
@@ -88,13 +118,12 @@ def specialChars(charAtt):
     i=len(charAttribute)
     count_special=0
     for char in charAttribute:
-        if (re.match("^[a-zA-Z0-9_]*$", char)):
+        if (re.match("^[a-zA-Z0-9_/-(]*$", char)):
             continue 
         else:
            count_special=count_special+1          
     ratio=count_special*1.0/i
     return round(ratio,4)
-
 
 #Numeric Feature Extraction
 fixed_length=100

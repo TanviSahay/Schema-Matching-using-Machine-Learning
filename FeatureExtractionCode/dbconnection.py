@@ -12,9 +12,9 @@ TIME_TYPES = (1083, 1114, 1184, 1266,)        # time, timestamp, timestamptz, ti
 
 keys = ['PRIMARY KEY' , 'FOREIGN KEY']
 
-features = ['type','length','key','unique','not_null']
+features = ['type','length','key','unique','not_null','avgUsedLength','VarofLength','VarCoeffLength','average','variance','Coeff','min','max','whitespace','specialchar','num2all','char2all','backslash','brackets','hyphen']
         
-conn = db.connect("dbname='databaseproject' user='postgres' host='localhost' password='#edc5tgb'")
+conn = db.connect("dbname='databaseproject' user='postgres' host='localhost'")
 
 curs = conn.cursor()
 
@@ -162,7 +162,9 @@ for i in range (0,len(descr)):
             attributes[descr[i][0]].append(fe.specialChars(data))
             attributes[descr[i][0]].append(fe.NumbertoAll(data))
             attributes[descr[i][0]].append(fe.ChartoAll(data))
-            
+            attributes[descr[i][0]].append(fe.Numberofbackslash(data))
+            attributes[descr[i][0]].append(fe.Numberofbrackets(data))
+            attributes[descr[i][0]].append(fe.Numberofhyphen(data))
 
 for key,values in attributes.items():
     print key,values
