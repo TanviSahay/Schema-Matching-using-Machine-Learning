@@ -118,12 +118,13 @@ def specialChars(charAtt):
     i=len(charAttribute)
     count_special=0
     for char in charAttribute:
-        if (re.match("^[a-zA-Z0-9_/-(]*$", char)):
+        if (re.match("^[a-zA-Z0-9_]*$", char)):
             continue 
         else:
            count_special=count_special+1          
     ratio=count_special*1.0/i
     return round(ratio,4)
+
 
 #Numeric Feature Extraction
 fixed_length=100
