@@ -6,12 +6,13 @@ def Normalise(features):
    for i in range(0,len(features[0])):
        column = features[:,i]
        maximum = max(column)
-       if maximum == 0 :
-          print i 
        #print maximum
        col = []
        for j in range(0,len(column)):
-          col.append(round(float(column[j])/maximum,4) )
+          if maximum == 0:
+             col.append(column[j])
+          else:   
+             col.append(round(float(column[j])/maximum,4) )
        #print col
        f_col.append(col)
    return f_col 
@@ -44,6 +45,7 @@ norm_dict = {}
 for i in range(0,len(keys)):
     norm_dict[keys[i]] = final_features[i]
 
+print norm_dict
 pickle.dump(norm_dict,open("normalised_features_train.pickle",'wb'))
 
 print "done"
