@@ -151,7 +151,10 @@ for i in range (0,len(descr)):
             attributes[descr[i][0]].append(0)
             attributes[descr[i][0]].append(0)
             attributes[descr[i][0]].append(0)
-            attributes[descr[i][0]].append(0)	
+            attributes[descr[i][0]].append(0)
+            attributes[descr[i][0]].append(0)
+            attributes[descr[i][0]].append(0)
+            attributes[descr[i][0]].append(0)
         else:	
             attributes[descr[i][0]].append(0)
             attributes[descr[i][0]].append(0)
@@ -170,3 +173,5 @@ for key,values in attributes.items():
     print key,values
 
 pickle.dump(attributes,open("DataFeatures_Train.pickle",'wb'))
+
+print len(attributes.values()[0])
