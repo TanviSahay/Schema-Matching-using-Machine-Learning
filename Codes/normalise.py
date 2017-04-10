@@ -17,7 +17,7 @@ def Normalise(features):
        f_col.append(col)
    return f_col 
 
-dict = pickle.load(open("DataFeatures_Train.pickle","rb"))
+dict = pickle.load(open("../Feature_Vectors/DataFeatures_Match.pickle","rb"))
 f = []
 keys = []
 for key in dict.keys():
@@ -46,7 +46,7 @@ for i in range(0,len(keys)):
     norm_dict[keys[i]] = final_features[i]
 
 print norm_dict
-pickle.dump(norm_dict,open("normalised_features_train.pickle",'wb'))
+pickle.dump(norm_dict,open("../Feature_Vectors/normalised_features_match.pickle",'wb'))
 
 print "done"
      

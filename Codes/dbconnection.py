@@ -14,7 +14,7 @@ keys = ['PRIMARY KEY' , 'FOREIGN KEY']
 
 features = ['type','length','key','unique','not_null','avgUsedLength','VarofLength','VarCoeffLength','average','variance','Coeff','min','max','whitespace','specialchar','num2all','char2all','backslash','brackets','hyphen']
         
-conn = db.connect("dbname='databaseproject' user='postgres' host='localhost'")
+conn = db.connect("dbname='testdata' user='tanvi'")
 
 curs = conn.cursor()
 
@@ -172,6 +172,6 @@ for i in range (0,len(descr)):
 for key,values in attributes.items():
     print key,values
 
-pickle.dump(attributes,open("DataFeatures_Train.pickle",'wb'))
+pickle.dump(attributes,open("../Feature_Vectors/DataFeatures_Match.pickle",'wb'))
 
 print len(attributes.values()[0])

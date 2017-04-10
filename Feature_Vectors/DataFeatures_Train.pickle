@@ -19,6 +19,9 @@ aI0
 aI0
 aI0
 aI0
+aI0
+aI0
+aI0
 asS'hbips_6_overall_num'
 p3
 (lp4
@@ -35,6 +38,9 @@ aF148.34209382140776
 aF1.0605
 aF0.0
 aF8420.0
+aI0
+aI0
+aI0
 aI0
 aI0
 aI0
@@ -59,6 +65,9 @@ aI0
 aI0
 aI0
 aI0
+aI0
+aI0
+aI0
 asS'ehr_use_measure_description'
 p7
 (lp8
@@ -79,6 +88,9 @@ aF0.1471
 aF0.1471
 aF0.0
 aF1.0
+aF0.0
+aF0.0
+aF0.0
 asS'hbips_3_overall_den'
 p9
 (lp10
@@ -95,6 +107,9 @@ aF564055.4329807506
 aF1.8906
 aF0.0
 aF559680.0
+aI0
+aI0
+aI0
 aI0
 aI0
 aI0
@@ -119,6 +134,9 @@ aF0.0909
 aF0.0909
 aF0.0
 aF1.0
+aF0.0
+aF0.0
+aF0.0
 asS'hbips_3_overall_num'
 p13
 (lp14
@@ -135,6 +153,9 @@ aF5707.830367930597
 aF16.2467
 aF0.0
 aF121752.0
+aI0
+aI0
+aI0
 aI0
 aI0
 aI0
@@ -159,6 +180,9 @@ aI0
 aI0
 aI0
 aI0
+aI0
+aI0
+aI0
 asS'hcp_percentage'
 p17
 (lp18
@@ -175,6 +199,9 @@ aF0.4402760350632383
 aF0.3594
 aF0.0
 aF100.0
+aI0
+aI0
+aI0
 aI0
 aI0
 aI0
@@ -199,6 +226,9 @@ aI0
 aI0
 aI0
 aI0
+aI0
+aI0
+aI0
 asS'imm_2_percentage'
 p21
 (lp22
@@ -215,6 +245,9 @@ aF9.121242857431549e-05
 aF0.4744
 aF0.0
 aF1.0
+aI0
+aI0
+aI0
 aI0
 aI0
 aI0
@@ -239,6 +272,9 @@ aI0
 aI0
 aI0
 aI0
+aI0
+aI0
+aI0
 asS'tob_1_denominator'
 p25
 (lp26
@@ -255,6 +291,9 @@ aF316.70494612746637
 aF1.6712
 aF0.0
 aF24700.0
+aI0
+aI0
+aI0
 aI0
 aI0
 aI0
@@ -279,6 +318,9 @@ aI0
 aI0
 aI0
 aI0
+aI0
+aI0
+aI0
 asS'tob_2_2a_measure_desc'
 p29
 (lp30
@@ -299,6 +341,9 @@ aF0.125
 aF0.1667
 aF0.0
 aF1.0
+aF0.0
+aF0.0208
+aF0.0
 asS'hbips_3_overall_footnote'
 p31
 (lp32
@@ -315,6 +360,9 @@ aF0.0004909405148731973
 aF6.8696
 aF0.0
 aF7.0
+aI0
+aI0
+aI0
 aI0
 aI0
 aI0
@@ -339,6 +387,9 @@ aF0.1
 aF0.1057
 aF0.0001
 aF0.9999
+aF0.0003
+aF0.0001
+aF0.002
 asS'hbips_7_overall_num'
 p35
 (lp36
@@ -355,6 +406,9 @@ aF128.6384684381321
 aF1.063
 aF0.0
 aF7028.0
+aI0
+aI0
+aI0
 aI0
 aI0
 aI0
@@ -379,6 +433,9 @@ aI0
 aI0
 aI0
 aI0
+aI0
+aI0
+aI0
 asS'hbips_5_overall_footnote'
 p39
 (lp40
@@ -395,6 +452,9 @@ aF0.0011587021663951491
 aF1.655
 aF0.0
 aF7.0
+aI0
+aI0
+aI0
 aI0
 aI0
 aI0
@@ -419,6 +479,9 @@ aI0
 aI0
 aI0
 aI0
+aI0
+aI0
+aI0
 asS'hbips_5_overall_percentage_of_total'
 p43
 (lp44
@@ -435,6 +498,9 @@ aF0.00013685420203408982
 aF1.3875
 aF0.0
 aF1.0
+aI0
+aI0
+aI0
 aI0
 aI0
 aI0
@@ -459,6 +525,9 @@ aI0
 aI0
 aI0
 aI0
+aI0
+aI0
+aI0
 asS'hbips_2_measure_description'
 p47
 (lp48
@@ -479,6 +548,9 @@ aF0.0968
 aF0.129
 aF0.0
 aF1.0
+aF0.0
+aF0.0
+aF0.0323
 asS'ehr_use_response'
 p49
 (lp50
@@ -499,6 +571,9 @@ aF0.1226
 aF0.1237
 aF0.0
 aF1.0
+aF0.0
+aF0.0
+aF0.0011
 asS'fuh_7_numerator'
 p51
 (lp52
@@ -515,6 +590,9 @@ aF1.0911170858803243
 aF1.2554
 aF0.0
 aF408.0
+aI0
+aI0
+aI0
 aI0
 aI0
 aI0
@@ -539,6 +617,9 @@ aF0.1111
 aF0.1111
 aF0.0
 aF1.0
+aF0.0
+aF0.0
+aF0.0
 asS'tob_2_2a_denominator'
 p55
 (lp56
@@ -555,6 +636,9 @@ aF90.71861285997424
 aF2.0014
 aF0.0
 aF12800.0
+aI0
+aI0
+aI0
 aI0
 aI0
 aI0
@@ -579,6 +663,9 @@ aF0.0
 aF0.0
 aF0.0
 aF1.0
+aF0.0
+aF0.0
+aF0.0
 asS'tob_2_numerator'
 p59
 (lp60
@@ -595,6 +682,9 @@ aF15.07946291161912
 aF1.2894
 aF0.0
 aF1885.0
+aI0
+aI0
+aI0
 aI0
 aI0
 aI0
@@ -619,6 +709,9 @@ aF0.0714
 aF0.0714
 aF0.0
 aF1.0
+aF0.0
+aF0.0
+aF0.0
 asS'sub_1_numerator'
 p63
 (lp64
@@ -635,6 +728,9 @@ aF70.11384096448661
 aF0.9339
 aF0.0
 aF5254.0
+aI0
+aI0
+aI0
 aI0
 aI0
 aI0
@@ -659,6 +755,9 @@ aF0.022
 aF0.0225
 aF0.0
 aF1.0
+aF0.0
+aF0.0
+aF0.0005
 asS'sub_1_measure_description'
 p67
 (lp68
@@ -679,6 +778,9 @@ aF0.0952
 aF0.0952
 aF0.0
 aF1.0
+aF0.0
+aF0.0
+aF0.0
 asS'tob_2_2a__denominator'
 p69
 (lp70
@@ -695,6 +797,9 @@ aF89.40087268385194
 aF2.173
 aF0.0
 aF12800.0
+aI0
+aI0
+aI0
 aI0
 aI0
 aI0
@@ -719,6 +824,9 @@ aF0.0
 aF0.2
 aF0.8
 aF0.2
+aF0.2
+aF0.0
+aF0.0
 asS'hbips_3_overall_rate_per_1000'
 p73
 (lp74
@@ -739,6 +847,9 @@ aF0.0
 aF0.2119
 aF0.7881
 aF0.2119
+aF0.0
+aF0.0
+aF0.0
 asS'zip_code'
 p75
 (lp76
@@ -755,6 +866,9 @@ aF464652.6111243608
 aF0.5811
 aF623.0
 aF99801.0
+aI0
+aI0
+aI0
 aI0
 aI0
 aI0
@@ -779,6 +893,9 @@ aF0.0044
 aF0.0044
 aF0.0
 aF1.0
+aF0.0
+aF0.0
+aF0.0
 asS'fuh_30_numerator'
 p79
 (lp80
@@ -795,6 +912,9 @@ aF2.696769756867155
 aF1.1003
 aF0.0
 aF563.0
+aI0
+aI0
+aI0
 aI0
 aI0
 aI0
@@ -819,6 +939,9 @@ aI0
 aI0
 aI0
 aI0
+aI0
+aI0
+aI0
 asS'hcp_denominator'
 p83
 (lp84
@@ -835,6 +958,9 @@ aF783.8612818066176
 aF3.3455
 aF0.0
 aF33588.0
+aI0
+aI0
+aI0
 aI0
 aI0
 aI0
@@ -859,6 +985,9 @@ aF0.1418
 aF0.194
 aF0.0448
 aF0.9552
+aF0.0
+aF0.0149
+aF0.0224
 asS'end_date'
 p87
 (lp88
@@ -879,6 +1008,9 @@ aF0.0
 aF0.2
 aF0.8
 aF0.2
+aF0.2
+aF0.0
+aF0.0
 asS'city'
 p89
 (lp90
@@ -899,6 +1031,9 @@ aF0.0279
 aF0.0281
 aF0.0
 aF1.0
+aF0.0
+aF0.0
+aF0.0001
 asS'hbips_5_overall_num'
 p91
 (lp92
@@ -915,6 +1050,9 @@ aF1.1426901759195631
 aF2.5535
 aF0.0
 aF700.0
+aI0
+aI0
+aI0
 aI0
 aI0
 aI0
@@ -939,6 +1077,9 @@ aI0
 aI0
 aI0
 aI0
+aI0
+aI0
+aI0
 asS'tob_2_percentage'
 p95
 (lp96
@@ -955,6 +1096,9 @@ aF0.00014204831687471178
 aF0.7691
 aF0.0
 aF1.0
+aI0
+aI0
+aI0
 aI0
 aI0
 aI0
@@ -979,6 +1123,9 @@ aI0
 aI0
 aI0
 aI0
+aI0
+aI0
+aI0
 asS'hbips_6_measure_description'
 p99
 (lp100
@@ -999,6 +1146,9 @@ aF0.093
 aF0.1163
 aF0.0
 aF1.0
+aF0.0
+aF0.0
+aF0.0233
 asS'imm_2_footnote'
 p101
 (lp102
@@ -1015,6 +1165,9 @@ aF0.0005660867241083959
 aF5.322
 aF0.0
 aF7.0
+aI0
+aI0
+aI0
 aI0
 aI0
 aI0
@@ -1039,6 +1192,9 @@ aI0
 aI0
 aI0
 aI0
+aI0
+aI0
+aI0
 asS'tob_2a_numerator'
 p105
 (lp106
@@ -1055,6 +1211,9 @@ aF7.230756085838064
 aF1.8025
 aF0.0
 aF1885.0
+aI0
+aI0
+aI0
 aI0
 aI0
 aI0
@@ -1079,6 +1238,9 @@ aI0
 aI0
 aI0
 aI0
+aI0
+aI0
+aI0
 asS'fuh_7_denominator'
 p109
 (lp110
@@ -1095,6 +1257,9 @@ aF9.56375486227124
 aF1.1765
 aF0.0
 aF933.0
+aI0
+aI0
+aI0
 aI0
 aI0
 aI0
@@ -1119,6 +1284,9 @@ aI0
 aI0
 aI0
 aI0
+aI0
+aI0
+aI0
 asS'sub_1_percentage'
 p113
 (lp114
@@ -1135,6 +1303,9 @@ aF5.580719566702822e-05
 aF0.3374
 aF0.0
 aF1.0
+aI0
+aI0
+aI0
 aI0
 aI0
 aI0
@@ -1159,6 +1330,9 @@ aF0.0
 aF0.2
 aF0.8
 aF0.2
+aF0.2
+aF0.0
+aF0.0
 asS'address'
 p117
 (lp118
@@ -1179,6 +1353,9 @@ aF0.1818
 aF0.1863
 aF0.1906
 aF0.8094
+aF0.0001
+aF0.0001
+aF0.0006
 asS'fuh_measure_start_date'
 p119
 (lp120
@@ -1199,6 +1376,9 @@ aF0.0
 aF0.2
 aF0.8
 aF0.2
+aF0.2
+aF0.0
+aF0.0
 asS'sub_1_footnote'
 p121
 (lp122
@@ -1215,6 +1395,9 @@ aF0.0006289515153075992
 aF5.5539
 aF0.0
 aF7.0
+aI0
+aI0
+aI0
 aI0
 aI0
 aI0
@@ -1239,6 +1422,9 @@ aF0.0962
 aF0.0962
 aF0.0
 aF1.0
+aF0.0
+aF0.0
+aF0.0
 asS'fuh_measure_end_date'
 p125
 (lp126
@@ -1259,6 +1445,9 @@ aF0.0
 aF0.2
 aF0.8
 aF0.2
+aF0.2
+aF0.0
+aF0.0
 asS'tob_1_percentage'
 p127
 (lp128
@@ -1275,6 +1464,9 @@ aF3.5073722392956666e-05
 aF0.2558
 aF0.0
 aF1.0
+aI0
+aI0
+aI0
 aI0
 aI0
 aI0
@@ -1299,6 +1491,9 @@ aF0.125
 aF0.125
 aF0.0
 aF1.0
+aF0.0
+aF0.0
+aF0.0
 asS'flu_season_end_date'
 p131
 (lp132
@@ -1319,6 +1514,9 @@ aF0.0
 aF0.2
 aF0.8
 aF0.2
+aF0.2
+aF0.0
+aF0.0
 asS'hbips_7_overall_den'
 p133
 (lp134
@@ -1335,6 +1533,9 @@ aF798.009450067754
 aF2.0942
 aF0.0
 aF41265.0
+aI0
+aI0
+aI0
 aI0
 aI0
 aI0
@@ -1359,6 +1560,9 @@ aI0
 aI0
 aI0
 aI0
+aI0
+aI0
+aI0
 asS'hbips_6_overall_den'
 p137
 (lp138
@@ -1375,6 +1579,9 @@ aF796.8160664958905
 aF2.0855
 aF0.0
 aF41265.0
+aI0
+aI0
+aI0
 aI0
 aI0
 aI0
@@ -1399,6 +1606,9 @@ aI0
 aI0
 aI0
 aI0
+aI0
+aI0
+aI0
 asS'imm_2_measure_description'
 p141
 (lp142
@@ -1419,6 +1629,9 @@ aF0.0455
 aF0.0455
 aF0.0
 aF1.0
+aF0.0
+aF0.0
+aF0.0
 asS'tob_1_measure_description'
 p143
 (lp144
@@ -1439,6 +1652,9 @@ aF0.0952
 aF0.0952
 aF0.0
 aF1.0
+aF0.0
+aF0.0
+aF0.0
 asS'hbips_5_overall_den'
 p145
 (lp146
@@ -1455,6 +1671,9 @@ aF4.619258917567119
 aF3.2559
 aF0.0
 aF2200.0
+aI0
+aI0
+aI0
 aI0
 aI0
 aI0
@@ -1479,6 +1698,9 @@ aI0
 aI0
 aI0
 aI0
+aI0
+aI0
+aI0
 asS'hbips_2_overall_num'
 p149
 (lp150
@@ -1495,6 +1717,9 @@ aF6176.136408663381
 aF11.7995
 aF0.0
 aF121752.0
+aI0
+aI0
+aI0
 aI0
 aI0
 aI0
@@ -1519,6 +1744,9 @@ aI0
 aI0
 aI0
 aI0
+aI0
+aI0
+aI0
 asS'fuh_30_footnote'
 p153
 (lp154
@@ -1535,6 +1763,9 @@ aF0.0007887294556024987
 aF2.9069
 aF0.0
 aF5.0
+aI0
+aI0
+aI0
 aI0
 aI0
 aI0
@@ -1559,6 +1790,9 @@ aI0
 aI0
 aI0
 aI0
+aI0
+aI0
+aI0
 asS'hbips_2_overall_rate_per_1000'
 p157
 (lp158
@@ -1579,6 +1813,9 @@ aF0.0
 aF0.2304
 aF0.7696
 aF0.2304
+aF0.0
+aF0.0
+aF0.0
 asS'peoc_assessed_footnote'
 p159
 (lp160
@@ -1595,6 +1832,9 @@ aF0.00016467497850353492
 aF9.5044
 aF0.0
 aF5.0
+aI0
+aI0
+aI0
 aI0
 aI0
 aI0
@@ -1619,6 +1859,9 @@ aI0
 aI0
 aI0
 aI0
+aI0
+aI0
+aI0
 asS'hbips_7_measure_description'
 p163
 (lp164
@@ -1639,6 +1882,9 @@ aF0.134
 aF0.1443
 aF0.0
 aF1.0
+aF0.0
+aF0.0
+aF0.0103
 asS'fuh_30_denominator'
 p165
 (lp166
@@ -1655,6 +1901,9 @@ aF9.056270043535303
 aF1.0933
 aF0.0
 aF933.0
+aI0
+aI0
+aI0
 aI0
 aI0
 aI0
@@ -1679,6 +1928,9 @@ aF0.0038
 aF0.0038
 aF0.0
 aF1.0
+aF0.0
+aF0.0
+aF0.0
 asS'tob_2a_percentage'
 p169
 (lp170
@@ -1695,6 +1947,9 @@ aF0.00011274508300004216
 aF1.7519
 aF0.0
 aF1.0
+aI0
+aI0
+aI0
 aI0
 aI0
 aI0

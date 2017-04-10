@@ -1,4 +1,4 @@
-Create Table HospitalMeasures(	Provider_Number numeric(500) PRIMARY KEY,
+/*Create Table HospitalMeasures(	Provider_Number numeric(500) PRIMARY KEY,
 				Hospital_Name VARCHAR(500),
 				Address VARCHAR(500), 
 				City VARCHAR(500),
@@ -87,6 +87,7 @@ Create Table HospitalMeasures(	Provider_Number numeric(500) PRIMARY KEY,
 
 \copy HospitalMeasures FROM 'HP.csv' DELIMITER ',' CSV	
 
+*/
 Create Table StateMeasures(     State CHAR(2) PRIMARY KEY,
 				S_HBIPS_2_Measure_Description VARCHAR(500),
 				S_HBIPS_2_Overall_Rate_Per_1000 numeric(500),
@@ -163,4 +164,5 @@ Create Table StateMeasures(     State CHAR(2) PRIMARY KEY,
 				S_Flu_Season_End_Date date);
 
 \copy StateMeasures FROM 'SP.csv' DELIMITER ',' CSV	
+
 	

@@ -4,11 +4,11 @@ import pickle
 from scipy.spatial import distance
 
 #Training Data
-dataFeaturePath = '../FeatureVectorResults/DataFeatures_Train.pickle'
+dataFeaturePath = '../Feature_Vectors/normalised_features_train.pickle'
 DataFeatures = pickle.load(open(dataFeaturePath, 'rb'))
 
 #Test Data
-testFeaturesPath = '../FeatureVectorResults/DataFeatures_Match.pickle'
+testFeaturesPath = '../Feature_Vectors/normalised_features_match.pickle'
 TestFeatures = pickle.load(open(testFeaturesPath,'rb'))
 
 #List of all features in training data
@@ -29,7 +29,7 @@ y = 7
 iteration = input("Input number of iterations: ")
 
 #Create a SOM
-som = MiniSom(x,y,17,sigma=0.3, learning_rate=0.5)
+som = MiniSom(x,y,20,sigma=0.3, learning_rate=0.5)
 print "Training..."
 som.train_random(Features, iteration) # trains the SOM with 100 iterations
 print "...ready!"
@@ -46,7 +46,7 @@ for i in range(x):
 
 #Open a csv file to write the attribute name and its corresponding cluster id
 #print 'attribute			Spatial Position'
-out_file_path = '../FeatureVectorResults/AttributeCluster_centroid_'+ str(x*y) + '_itr' + str(iteration) + '.csv'
+out_file_path = '../Results/Centroid_Clustering_Result/AttributeCluster_centroid_'+ str(x*y) + '_itr' + str(iteration) + '.csv'
 out_file = open(out_file_path,'w')
 output_file = csv.writer(out_file, delimiter = ',')
 output_file.writerow(["Attribute", "Cluster ID"])
@@ -66,7 +66,7 @@ for k in DataFeatures.keys():
 out_file.close()
 
 #Open the output file for test data clusters
-out_file_path_test = '../FeatureVectorResults/TestCluster_centroid_'+ str(x*y) + '_itr' + str(iteration) +'.csv'
+out_file_path_test = '../Results/Centroid_Clustering_Result/CentroidDistance_20_'+ str(x*y) + '_itr' + str(iteration) +'.csv'
 out_file = open(out_file_path_test,'w')
 output_file = csv.writer(out_file, delimiter = ',')
 output_file.writerow(["Attribute", "Cluster ID"])
@@ -119,7 +119,7 @@ for key, value in test_cluster.items():
 
 
 
-
+'''
 #Testing feature vectors
 print "Feature vector of ---s_hbips_7_measure_description---"
 print TestFeatures['s_hbips_7_measure_description']
@@ -127,3 +127,4 @@ print TestFeatures['s_hbips_7_measure_description']
 print "\n"
 print "Feature vector of ---imm_2_denominator---"
 print DataFeatures['imm_2_denominator']
+'''

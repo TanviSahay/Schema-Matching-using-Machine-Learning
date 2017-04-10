@@ -4,11 +4,11 @@ import pickle
 from scipy.spatial import distance
 
 #Training Data
-dataFeaturePath = '../Codes/DataFeatures.pickle'
+dataFeaturePath = './normalised_features_train.pickle'
 DataFeatures = pickle.load(open(dataFeaturePath, 'rb'))
 
 #Test Data
-testFeaturesPath = '../Codes/DataFeatures_Match.pickle'
+testFeaturesPath = '../Feature_Vectors/DataFeatures_Match.pickle'
 TestFeatures = pickle.load(open(testFeaturesPath,'rb'))
 
 #List of all features in training data
@@ -22,13 +22,13 @@ for val in TestFeatures.values():
     testFeatures.append(val)
 
 #(x,y) -- size of output grid for SOM
-x = 5
-y = 3
+x = 7
+y = 7
 #Number of iterations to run
 iteration = input("Input number of iterations: ")
 
 #Create a SOM
-som = MiniSom(x,y,17,sigma=0.3, learning_rate=0.5)
+som = MiniSom(x,y,20,sigma=0.3, learning_rate=0.5)
 print "Training..."
 som.train_random(Features, iteration) # trains the SOM with 100 iterations
 print "...ready!"
@@ -45,7 +45,7 @@ for i in range(x):
 
 #Open a csv file to write the attribute name and its corresponding cluster id
 #print 'attribute			Spatial Position'
-out_file_path = '../Codes/AttributeCluster_centroid_'+ str(x*y) + '_itr' + str(iteration) + '.csv'
+out_file_path = '../Results/AttributeCluster_20_itr' + str(iteration) + '.csv'
 out_file = open(out_file_path,'w')
 output_file = csv.writer(out_file, delimiter = ',')
 output_file.writerow(["Attribute", "Cluster ID"])
@@ -58,12 +58,13 @@ attribute_cluster = {}
 
 for k in DataFeatures.keys():
     for f in Features:
-        if DataFeatures[k] == f:
+        if DataFeatures[k] == f and k not in attribute_cluster.keys():
             attribute_cluster[k] = feature_map[som.winner(f)]
             output_file.writerow([k, feature_map[som.winner(f)]])
 
 out_file.close()
 
+'''
 #Open the output file for test data clusters
 out_file_path_test = '../Codes/TestCluster_centroid_'+ str(x*y) + '_itr' + str(iteration) +'.csv'
 out_file = open(out_file_path_test,'w')
@@ -126,3 +127,5 @@ print TestFeatures['s_hbips_7_measure_description']
 print "\n"
 print "Feature vector of ---imm_2_denominator---"
 print DataFeatures['imm_2_denominator']
+
+'''
