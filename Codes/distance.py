@@ -26,7 +26,7 @@ def cosine_euc_distance(test_names_features , train_name_features):
          euc_distance[test_name] = {}
          
          for name in train_names_features.keys():
-              cosine_distance[test_name][name] = cosine_similarity(test_names_features[test_name], train_names_features[name])
+              cosine_distance[test_name][name] = cosine_similarity(test_names_features[test_name], train_names_features[name])[0][0]
               euc_distance[test_name][name] = distance.euclidean(test_names_features[test_name], train_names_features[name])
           
 
@@ -41,7 +41,7 @@ def cal_probability(distance_dic,name):
            total = sum(distance_dic[test_attribute].values())
            
            for train_attribute in distance_dic[test_attribute].keys():
-                prob = distance_dic[test_attribute][train_attribute]/float(total)
+                prob = 1 - (distance_dic[test_attribute][train_attribute]/float(total))
                 new_row = [test_attribute,train_attribute,distance_dic[test_attribute][train_attribute] ,prob]       
                 Out.writerow(new_row)
      file_path.close()      
