@@ -1,0 +1,4 @@
+In this paper, they perform two types of matchings: linguistic matching and structural matching. For linguistic matching, they make use of a thesaurus or dictionary that contains synonyms, acronyms, hypernyms etc. (Self created). For structural matching, they create a tree and match the neighbors/context of an attribute.
+Assumption - Schema is heirarchical, which in our case it is not.
+
+For non-heirarchical schema, they have generalized to graphs. In the graph, they take "elements" of the schema to be nodes of the graph. Elements - Tables, columns, keys etc.(Don't quite understand what these elements are and how they are found/decided). They consider three relationships between the different elements of a schema to prepare a graph for each. 
