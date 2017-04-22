@@ -88,7 +88,9 @@
 \copy HospitalMeasures FROM 'HP.csv' DELIMITER ',' CSV	
 
 */
-Create Table StateMeasures(     State CHAR(2) PRIMARY KEY,
+Create Table StateMeasures(     St_No numeric(500) NOT NULL,
+                                St_Name VARCHAR(500) NOT NULL,
+                                State CHAR(2) PRIMARY KEY,
 				S_HBIPS_2_Measure_Description VARCHAR(500),
 				S_HBIPS_2_Overall_Rate_Per_1000 numeric(500),
 				S_HBIPS_2_Overall_Num numeric(10) NOT NULL,

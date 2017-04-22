@@ -42,12 +42,12 @@ for i in range(x):
         feature_map[(i,j)] = k
         k += 1
         
-print feature_map, '\n'      
+print feature_map, '\n'
+
+      
 #Write the attribute name and its corresponding id. DataFeatures is the dictionary (attribute, feature). attribute_cluster is the dictionary (attribute, cluster_id). If the feature being mapped is same as the feature in the dictionary, save its winner ID in the dictionary.
 
 attribute_cluster = defaultdict(lambda:defaultdict())
-
-
 for k in DataFeatures.keys():
     for f in Features:
         if DataFeatures[k] == f:
@@ -63,4 +63,17 @@ for k in TestFeatures.keys():
 #print attribute_cluster[]
 
 pickle.dump(attribute_cluster,open('../Results/SOM_train_test.pickle','w'))
-            
+
+
+#Open the output file for test data clusters
+out_file_path_test = '../Results/Distances/SOM_'+ str(x*y) + '_itr' + str(iteration) +'.csv'
+out_file = open(out_file_path_test,'w')
+output_file = csv.writer(out_file, delimiter = ',')
+output_file.writerow(["Attribute", "Cluster ID"])            
+
+for key1,value in attribute_cluster.items():
+    for key2 in value.keys():
+        new_row = [key1, key2]
+        output_file.writerow(new_row)
+
+out_file.close()
