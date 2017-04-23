@@ -4,37 +4,14 @@ import FeatureExtraction as fe
 import pickle
 
         
-conn = db.connect("dbname='databaseproject' user='postgres' host='localhost' password='#edc5tgb'")
+Train_data = open("../Feature_Vectors/DataFeatures_Train.pickle",'r'))
 
-curs = conn.cursor()
+Test_data = open("../Feature_Vectors/DataFeatures_Match.pickle",'r'))
 
-curs.execute("SELECT table_name FROM information_schema.tables WHERE table_schema='public' ;")
-
-tab = curs.fetchall()
-
-table_nam = ''.join(tab[0])
-
-curs = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-
-curs.execute('Select *from ' + table_nam +' limit 20;')
-
-Test_set = [description[0] for description in curs.description]
-
-conn = db.connect("dbname='databaseproject_1' user='postgres' host='localhost' password='#edc5tgb'")
-
-curs = conn.cursor()
-
-curs.execute("SELECT table_name FROM information_schema.tables WHERE table_schema='public' ;")
-
-tab = curs.fetchall()
-table_nam = ''.join(tab[0])
-
-curs = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-
-curs.execute('Select *from ' + table_nam +' limit 20;')
-
-Train_set = [description[0] for description in curs.description]
-
+Train_set = [k for k in Train_data.keys()]
+Test_set = [k for k in Test_data.keys()]
+    
+print Train_set , Train_set
 
 Global_Dictionary={}
 Global_Dictionary[('Name','PatientName')]=[['First Name','First_Name','FName','F_Name'],['Last_Name','Last Name','LName','L_Name']]

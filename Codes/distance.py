@@ -10,11 +10,17 @@ def calculate_edit_distance(test_names_features , train_names_features):
     
 # Calculating edit distance of a test attribute from all train attributes.
     for test_name in test_names_features.keys():
-         edit_distance[test_name] = {}   
-         for name in train_names_features:
-              edit_distance[test_name][name] = editdistance.eval(test_name, name)
-          
+         edit_distance[test_name] = {} 
+         
+         if train_names_features == {}:
+            print test_name
+            #missed_attributes += test_name + " "
+         else:
+            for name in train_names_features:
+                edit_distance[test_name][name] = editdistance.eval(test_name, name)      
 
+
+      
 # cluster_name_features is a dictionary 
 def cosine_euc_distance(test_names_features , train_name_features):
     
@@ -55,8 +61,9 @@ global euc_distance
 edit_distance = {}
 cosine_distance = {}
 euc_distance = {}
+missed_attributes = ""
  
-Test_Data      = pickle.load(open('../Feature_Vectors/normalised_features_match.pickle'))		#Test_Data[Attribute Name]   = feature vector
+Test_Data      = pickle.load(open('../Feature_Vectors/DataFeatures_match.pickle'))		#Test_Data[Attribute Name]   = feature vector
 Som_clusters   = pickle.load(open('../Results/Distances/SOM_train_test.pickle'))		        #cluster[id][attribute_name] = feature vector 
  
 Test_names = []
@@ -64,12 +71,10 @@ Test_features = []
   
 for cluster_id in Som_clusters.values():
 
-    print cluster_id
     test_names_features = {}
     train_names_features = {}
     
     for attribute in cluster_id.keys():
-         print attribute
          if attribute in Test_Data.keys():
                 test_names_features[attribute] =  cluster_id[attribute]          
          else:
@@ -83,7 +88,7 @@ for cluster_id in Som_clusters.values():
 cal_probability(edit_distance,'edit')
 cal_probability(cosine_distance,'cosine')
 cal_probability(euc_distance,'euc')
-  
+      
 print "done"    
     
     
