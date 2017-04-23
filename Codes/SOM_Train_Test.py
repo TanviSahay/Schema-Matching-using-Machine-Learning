@@ -39,7 +39,7 @@ for i in range(0,len(c_features[0])):
 
 
 x = 7
-y = 8
+y = 7
 #Number of iterations to run
 
 iteration = input("Input number of iterations: ")
