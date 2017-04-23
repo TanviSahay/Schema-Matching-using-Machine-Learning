@@ -38,8 +38,8 @@ for i in range(0,len(c_features[0])):
 #(x,y) -- size of output grid for SOM
 
 
-x = 7
-y = 7
+x = 5
+y = 6
 #Number of iterations to run
 
 iteration = input("Input number of iterations: ")
