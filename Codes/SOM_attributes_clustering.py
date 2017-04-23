@@ -53,7 +53,9 @@ output_file.writerow(["Attribute", "Cluster ID"])
 
 print "number of rows to be written: ", len(Features)
 
-#Write the attribute name and its corresponding id. DataFeatures is the dictionary (attribute, feature). attribute_cluster is the dictionary (attribute, cluster_id). If the feature being mapped is same as the feature in the dictionary, save its winner ID in the dictionary.
+# Write the attribute name and its corresponding id. DataFeatures is the dictionary (attribute, feature). 
+# Attribute_cluster is the dictionary (attribute, cluster_id). 
+# If the feature being mapped is same as the feature in the dictionary, save its winner ID in the dictionary.
 
 attribute_cluster = {}
 
@@ -105,6 +107,8 @@ for key, value in TestFeatures.items():
             min_dist = min_d
     
             test_cluster[key] = centerID
+
+
      
 for key, value in test_cluster.items():
     output_file.writerow([key,value])

@@ -7,35 +7,36 @@ import dill
 from sklearn.metrics import silhouette_score
 from normalise import Normalise
 
-#Training Data
-dataFeaturePath = '../Feature_Vectors/normalised_features_train.pickle'
+# Training Data
+dataFeaturePath = '../Feature_Vectors/DataFeatures_Train.pickle'
 DataFeatures = pickle.load(open(dataFeaturePath, 'rb'))
 
-#Test Data
-testFeaturesPath = '../Feature_Vectors/normalised_features_match.pickle'
+# Test Data
+testFeaturesPath = '../Feature_Vectors/DataFeatures_Match.pickle'
 TestFeatures = pickle.load(open(testFeaturesPath,'rb'))
 
-#List of all features in training and testing data
+
+# List of all features in training and testing data
 InitFeatures = []
-for val in DataFeatures.values():
+all_attributes = []
+
+for key,val in DataFeatures.items():
+    all_attributes.append(key)
     InitFeatures.append(val)
-for val in TestFeatures.values():
+    
+for key,val in TestFeatures.items():
+    all_attributes.append(key)
     InitFeatures.append(val)
 
+# Normalise the Train + Test Features together 
 c_features = Normalise(numpy.array(InitFeatures))
 
 Features = []
+
 for i in range(0,len(c_features[0])):
      #column = c_features[:][i]
      column = [row[i] for row in c_features]
      Features.append(column)
-
-#print len(Features)
-#print len(InitFeatures)
-
-#Features = N_Features
-
-#(x,y) -- size of output grid for SOM
 
 
 x = 5
@@ -63,22 +64,30 @@ print feature_map, '\n'
 
 
       
-#Write the attribute name and its corresponding id. DataFeatures is the dictionary (attribute, feature). attribute_cluster is the dictionary (attribute, cluster_id). If the feature being mapped is same as the feature in the dictionary, save its winner ID in the dictionary.
+#Write the attribute name and its corresponding id. DataFeatures is the dictionary (attribute, feature).
+# Attribute_cluster is the dictionary (attribute, cluster_id). If the feature being mapped is same as the feature in the dictionary, save its winner ID in the dictionary.
 
 attribute_cluster = defaultdict(lambda:defaultdict())
+
+for i in range(0,len(all_attributes)):
+     print feature_map[som.winner(Features[i])]
+     attribute_cluster[feature_map[som.winner(Features[i])]][all_attributes[i]] = Features[i] 
+
+'''    	
 for k in DataFeatures.keys():
     for f in Features:
         if DataFeatures[k] == f:
             print feature_map[som.winner(f)]
             attribute_cluster[feature_map[som.winner(f)]][k] = f
+            
 #print attribute_cluster
 for k in TestFeatures.keys():
     for f in Features:
         if TestFeatures[k] == f:
             attribute_cluster[feature_map[som.winner(f)]][k] = f
 
-
-#print attribute_cluster[]
+'''
+print attribute_cluster
 
 pickle.dump(attribute_cluster,open('../Results/SOM_train_test_with_normal.pickle','w'))
 

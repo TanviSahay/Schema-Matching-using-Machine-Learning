@@ -13,8 +13,9 @@ def calculate_edit_distance(test_names_features , train_names_features):
          edit_distance[test_name] = {} 
          
          if train_names_features == {}:
-            print test_name
-            #missed_attributes += test_name + " "
+            edit_distance[test_name]['None'] = 1
+            missing_attributes.append(test_name)
+            
          else:
             for name in train_names_features:
                 edit_distance[test_name][name] = editdistance.eval(test_name, name)      
@@ -38,7 +39,7 @@ def cosine_euc_distance(test_names_features , train_name_features):
 
 
 def cal_probability(distance_dic,name):
-     file_path = open('../Results/distances/' + name + '.csv','w')
+     file_path = open('../Results/Distances/' + name + '.csv','w')
      Out = csv.writer(file_path,delimiter=',')
      
      new_row = ['test_attribute' , 'train_attribute' , 'distance', 'probability']
@@ -57,18 +58,20 @@ def cal_probability(distance_dic,name):
 global edit_distance
 global cosine_distance
 global euc_distance
+global missing_attributes
 
+missing_attributes = []
 edit_distance = {}
 cosine_distance = {}
 euc_distance = {}
-missed_attributes = ""
  
-Test_Data      = pickle.load(open('../Feature_Vectors/DataFeatures_match.pickle'))		#Test_Data[Attribute Name]   = feature vector
-Som_clusters   = pickle.load(open('../Results/Distances/SOM_train_test.pickle'))		        #cluster[id][attribute_name] = feature vector 
+Test_Data      = pickle.load(open('../Feature_Vectors/DataFeatures_Match.pickle'))		#Test_Data[Attribute Name]   = feature vector
+Som_clusters   = pickle.load(open('../Results/Distances/SOM_train_test_with_normal.pickle'))		        #cluster[id][attribute_name] = feature vector 
  
 Test_names = []
 Test_features = []
-  
+ 
+print  Som_clusters.keys()
 for cluster_id in Som_clusters.values():
 
     test_names_features = {}
@@ -88,7 +91,8 @@ for cluster_id in Som_clusters.values():
 cal_probability(edit_distance,'edit')
 cal_probability(cosine_distance,'cosine')
 cal_probability(euc_distance,'euc')
-      
+
+print "missing attributes" , missing_attributes      
 print "done"    
     
     
