@@ -15,6 +15,10 @@ keys = ['PRIMARY KEY' , 'FOREIGN KEY']
 features = ['type','length','key','unique','not_null','avgUsedLength','VarofLength','VarCoeffLength','average','variance','Coeff','min','max','whitespace','specialchar','num2all','char2all','backslash','brackets','hyphen']
         
 conn = db.connect("dbname='testdata' user='tanvi'")
+#n_data = 1644
+#typ = 'tr_'
+n_data = 52
+typ = 'ts_'
 
 curs = conn.cursor()
 
@@ -31,6 +35,7 @@ curs.execute('Select *from ' + table_nam +' limit 20;')
 
 descr = curs.description # description about the column attributes
 
+     
 attributes = {}
 for i in range (0,len(descr)):
       attributes[descr[i][0]] = []
@@ -141,11 +146,11 @@ for i in range (0,len(descr)):
         
             data = temp  
         fixed_length=attributes[descr[i][0]][1] 
-        attributes[descr[i][0]].append(fe.averageusedlength(data,74,fixed_length))
+        attributes[descr[i][0]].append(fe.averageusedlength(data,n_data,fixed_length))
         attributes[descr[i][0]].append(fe.varianceoflength(data,fixed_length))
         attributes[descr[i][0]].append(fe.varianceCoefflength(data))
         if attributes[descr[i][0]][0] == 1 or attributes[descr[i][0]][0] == 0:
-            number_features=list(fe.numFeatures(data,fixed_length,74))
+            number_features=list(fe.numFeatures(data,fixed_length,n_data))
        	    for values in number_features:
       	          attributes[descr[i][0]].append(values)
             attributes[descr[i][0]].append(0)
@@ -169,9 +174,17 @@ for i in range (0,len(descr)):
             attributes[descr[i][0]].append(fe.Numberofbrackets(data))
             attributes[descr[i][0]].append(fe.Numberofhyphen(data))
 
-for key,values in attributes.items():
-    print key,values
+#for key,values in attributes.items():
+    #print key,values
 
-pickle.dump(attributes,open("../Feature_Vectors/DataFeatures_Match.pickle",'wb'))
+#print attributes['state']
 
-print len(attributes.values()[0])
+new_attributes = {}
+for k in attributes.keys():
+    key_val = typ + k
+    new_attributes[key_val] = attributes[k]
+
+print new_attributes
+pickle.dump(new_attributes,open("../Feature_Vectors/DataFeatures_Match.pickle",'wb'))
+
+print len(new_attributes)
