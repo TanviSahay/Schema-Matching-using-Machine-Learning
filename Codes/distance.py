@@ -17,10 +17,10 @@ def calculate_edit_distance(test_names_features , train_names_features):
             missing_attributes.append(test_name)
             
          else:
-            for name in train_names_features:
+            for name in train_names_features.keys():
                 edit_distance[test_name][name] = editdistance.eval(test_name, name)      
 
-
+    return edit_distance
       
 # cluster_name_features is a dictionary 
 def cosine_euc_distance(test_names_features , train_name_features):
@@ -89,8 +89,8 @@ for cluster_id in Som_clusters.values():
 
 #Calulating Probablity for all three distances
 cal_probability(edit_distance,'edit')
-cal_probability(cosine_distance,'cosine')
-cal_probability(euc_distance,'euc')
+#cal_probability(cosine_distance,'cosine')
+#cal_probability(euc_distance,'euc')
 
 print "missing attributes" , missing_attributes      
 print "done"    
