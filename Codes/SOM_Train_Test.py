@@ -39,8 +39,8 @@ for i in range(0,len(c_features[0])):
      Features.append(column)
 
 
-x = 5
-y = 6
+x = 7
+y = 7
 #Number of iterations to run
 
 iteration = input("Input number of iterations: ")
@@ -89,7 +89,7 @@ for k in TestFeatures.keys():
 '''
 print attribute_cluster
 
-pickle.dump(attribute_cluster,open('../Results/SOM_train_test_with_normal.pickle','w'))
+pickle.dump(attribute_cluster,open('../Results/SOM_train_test_with_normal_49.pickle','w'))
 
 
 #Open the output file for test data clusters

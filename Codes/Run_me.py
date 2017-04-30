@@ -168,7 +168,7 @@ for cluster_id in attribute_clusters.values():
     edit_distance = calculate_edit_distance(test_names_features,train_names_features)
 
 
-OneToOne = 'FinalSOM_editDistance'
+OneToOne = 'FinalSOM_editDistance_48'
 cal_probability(edit_distance,OneToOne)
 
 print 'All one to one mappings saved in the file: ', OneToOne + '.csv'
