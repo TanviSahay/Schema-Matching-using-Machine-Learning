@@ -1,0 +1,39 @@
+\begin{thebibliography}{1}
+
+\bibitem{ref2}
+Jacob Berlin and Amihai Motro.
+\newblock Database schema matching using machine learning with feature
+  selection.
+\newblock In {\em Proceedings of the 14th International Conference on Advanced
+  Information Systems Engineering}, CAiSE '02, pages 452--466, London, UK, UK,
+  2002. Springer-Verlag.
+
+\bibitem{ref1}
+Wen-Syan Li and Chris Clifton.
+\newblock Semantic integration in heterogeneous databases using neural
+  networks.
+\newblock In {\em Proceedings of the 20th International Conference on Very
+  Large Data Bases}, VLDB '94, pages 1--12, San Francisco, CA, USA, 1994.
+  Morgan Kaufmann Publishers Inc.
+
+\bibitem{ref4}
+Jayant Madhavan, Philip~A. Bernstein, AnHai Doan, and Alon Halevy.
+\newblock Corpus-based schema matching.
+\newblock In {\em Proceedings of the 21st International Conference on Data
+  Engineering}, ICDE '05, pages 57--68, Washington, DC, USA, 2005. IEEE
+  Computer Society.
+
+\bibitem{ref3}
+Jayant Madhavan, Philip~A. Bernstein, and Erhard Rahm.
+\newblock Generic schema matching with cupid.
+\newblock In {\em Proceedings of the 27th International Conference on Very
+  Large Data Bases}, VLDB '01, pages 49--58, San Francisco, CA, USA, 2001.
+  Morgan Kaufmann Publishers Inc.
+
+\bibitem{ref5}
+Qian Ying, Yue Liwen, and Liu Zhenglin.
+\newblock Discovering complex matches between database schemas.
+\newblock In {\em 2008 27th Chinese Control Conference}, pages 663--667, July
+  2008.
+
+\end{thebibliography}
