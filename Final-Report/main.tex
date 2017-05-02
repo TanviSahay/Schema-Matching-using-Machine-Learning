@@ -472,7 +472,7 @@ Tanvi Sahay & 45cccc & PoliSci & 3xx & N Pleasant St\\
 \end{table}
 
 
-Over the years, researchers have faced several issues when trying to automate the process of matching schemas of different relations. Because the schemas are created by human developers and are pertinent to a particular domain, human intervention is often required at one or multiple stages of the process to ensure proper schema matching, which makes this taks quite labor intensive. The aim of automated schema matching is to reduce the involvement of a domain expert in the process to a minimum. Majorly, schema matching can be divided into two parts - one to one matching, where one attribute of table 1 matches with only one attribute of table 2 and one to many matching, where one attribute of table 1 may map to a combination of several attributes of table 2. While one to one matching has been successfully automated using sophisticated machine learning techniques as well as by exploiting the schema structure, performing one to many schema matching still requires some form of human intervention. In general, matching can be done by taking into account either the data contained in the relations or the name of the attributes or both.
+Over the years, researchers have faced several issues when trying to automate the process of matching schemas of different relations. Because the schemas are created by human developers and are pertinent to a particular domain, human intervention is often required at one or multiple stages of the process to ensure proper schema matching, which makes this task quite labor intensive. The aim of automated schema matching is to reduce the involvement of a domain expert in the process to a minimum. Majorly, schema matching can be divided into two parts - one to one matching, where one attribute of table 1 matches with only one attribute of table 2 and one to many matching, where one attribute of table 1 may map to a combination of several attributes of table 2. While one to one matching has been successfully automated using sophisticated machine learning techniques as well as by exploiting the schema structure, performing one to many schema matching still requires some form of human intervention. In general, matching can be done by taking into account either the data contained in the relations or the name of the attributes or both.
 
 In this project, we explore two methods of performing one to one matching and suggest a new method of one to many mapping which is different from the ones that have been employed before. For one to one matching, we consider two appoaches, both based on utilizing a set of features to find similar attributes. In the first method, called centrid method, we cluster similar values of one table together into groups and compare each attribute of the second table with each cluster, to find the one that best matches with it. In the second method, called the combined method, we cluster attributes of both tables together to form groups containing fields from both tables. The centroid method, as we will see in the future sections, ensures that every attribute in the second table matches with at least one attribute in the first table. The combined approach on the other hand still has the possibility of an attribute in one table not matching with any other attribute in the second table. Each method will be discussed in more detail in the future sections and their tradeoffs as well as their performance with existing techniques will be compared as well. In addition to these techniques, we will discuss a new way of taking care of one to many matchings with minimum requirement of an external expert.
 
@@ -489,21 +489,58 @@ This paper implemented schema matching using Machine Learning approach. It extra
 While this method, known as SemaInt, provides the user with a similarity mapping of each attribute in one schema with a set of attributes in another, it does not take into account the fact one might map to a set of others as well.
 
 \subsection*{\textbf{Corpus-based Schema Matching}\cite{ref4}}
+This paper makes use of a corpora of schemas to prepare models of each attribute in the schemas to be matched by making use of information provided other attributes similar to the ones being matched. Similar attributes are found by making use of learners such as name learner, text learner, context learner etc. and for matching attributes across two schemas, similarity of an attribute matching with the other based on the new `augmented' models is calculated. 
+
+This method only considers one to one matching of attributes and cannot handle complex mappings like one to many or many to one. It also requires a significant amount of corpora to successfully learn good attribute models.
+
+\iffalse
 In this paper, schema matching is applied on the corpus containing multiple schemas that model similar concepts. It trains a classifier using the information retrieved from the schema structure, data instances and their contexts. Then using the learned information it predicts the one-to-one mappings.
 
 It doesn’t consider the one-to-many and complex mappings and can only be applied on the smaller datasets.
+\fi
 
 \subsection*{\textbf{Generic Schema Matching with Cupid}\cite{ref3}}
+This paper explores a technique of matching which is schema based and not instance based. In the proposed method, heirarchical schemas are represented as trees and non-heirarchical schemas are generalied as graphs. Two types are matching scores, based on linguistic similarity i.e. similarity between schema attribute names, data types and domain etc. and based on structural similarity i.e. similarity based on context and vicinity are calculated and their average is assigned as the final matching score for a pair of attributes.
+
+This method maintains a thesaurus for finding linguistic similarity and also makes use of information other than just the schema name, such as schema structure and relation of attributes with each when assiging scores.
+
+\iffalse
 This paper explores the internal structure of the schema by combining various techniques viz Linguistic Matching, Structure-based matching constraint-based matching, and context-based matching. It applies TreeMatch algorithm to perform the schema matching by giving tree structure to the schema.
 
 However, it considers both one-to-one and one-to-many mapping but it does not use the information provided by data instances and only explores the schema structure.
+\fi
 
 \subsection*{\textbf{iMAP:Discovering Complex Semantic Matches between Database Schemas}\cite{ref5}}
+iMAP introduces a new method of semi-automatically performing both one to one and one to many schema matching by converting the matching problem to a search problem in a relatively large search space of all possible schema mappings. For efficient searching, the paper proposes to make use of custom searchers based on concatenation of text, arithmetic operations over numeric attributes etc. and scoring each match to find the best possible matchings. Since the searchers are customized over type of data, they only search through a subset of search space, thus reducing system complexity. 
+
+While this method achieves one to many mapping, it still requires a domain expert for creating custom searchers specific to a particular type of database. The method also makes use of only the data contained in the tables and not the schema names themselves.\\
+
+\noindent
+As we have seen, the methods shown above either focus only on one to one mappings or, when considering one to many mappings, do not take the actual schema names into account. One to one schema matching techniques also require a large amount of data to successfully train the machine learning models being employed, which may not necessarily be available. Our method presents a different approach in that we consider both one to one and one to many mapping and make use of both the data represented by the schema and the schema names themselves. The technique is not data intensive and requires minimum human intervention, requiring a domain expert only for the task of creating the one to many mapping dictionary.
+
+\iffalse
 In this paper, authors have developed various searchers for different data types viz: text, number, date. For example: address = concat(city,state). It exploits the domain knowledge to improve the accuracy of the making searchers. 
+\fi
 
 
+\section{Methodology}
+For the purpose of implementation, we have divided our task into two separate sections: One to Many Mapping and One to One Mapping. In all discussions that follow, we assume that we have a source schema S and a test schema T and our task is to map attributes present in the test schema to attributes present in the source schema. 
 
+\subsection{One To Many Schema Matching}
+We propose to solve the one to many schema matching problem by creating a global dictionary of all possible mappings, with the parent attribute as key and all children attributes as their corresponding values. When a key is present in the source schema and the key's corresponding values are present in the test schema, that set of attributes is separated as a one to many schema mapping. Attributes in S and T that have already been considered as a part of any one to many match will not be considered when looking at the one to one schema matching.
 
+\subsection{One To One Schema Matching}
+One to One schema matching is done by extracting meaningful descriptive features of each attribute and using these features to find similar attributes across the two schemas in consideration. After extracting features of each attribute, we have experimented with two methods, namely: Centroid Method and Combined Method. Each method has been evaluated using a measure called F-Score, which is a combination of both precision and recall. Each section of one to one schema matching has been explained below.
+\subsubsection{Feature Engineering and Feature Extraction}
+\subsubsection{Clustering - Centroid Method}
+\subsubsection{Clustering - Combined Method}
+\subsubsection{Evaluation}
+
+\section{Experimentation and Results}
+
+\section{Conclusion}
+
+\section{Future Work}
 % needed in second column of first page if using \IEEEpubid
 %\IEEEpubidadjcol
 
@@ -591,8 +628,8 @@ In this paper, authors have developed various searchers for different data types
 
 
 
-\section{Conclusion}
-\blindtext
+%\section{Conclusion}
+%\blindtext
 
 
 
@@ -613,15 +650,15 @@ In this paper, authors have developed various searchers for different data types
 %
 
 
-\appendices
-\section{Proof of the First Zonklar Equation}
-\blindtext
+%\appendices
+%\section{Proof of the First Zonklar Equation}
+%\blindtext
 
 % use section* for acknowledgement
-\section*{Acknowledgment}
+%\section*{Acknowledgment}
 
 
-The authors would like to thank...
+%The authors would like to thank...
 
 
 % Can use something like this to put references on a page
