@@ -146,26 +146,28 @@ for i in range (0,len(descr)):
         
             data = temp  
         fixed_length=attributes[descr[i][0]][1] 
-        attributes[descr[i][0]].append(fe.averageusedlength(data,n_data,fixed_length))
+        attributes[descr[i][0]].append(float(fe.averageusedlength(data,n_data,fixed_length)))
+        print 'average used length - ', fe.averageusedlength(data, n_data, fixed_length)
+
         attributes[descr[i][0]].append(fe.varianceoflength(data,fixed_length))
         attributes[descr[i][0]].append(fe.varianceCoefflength(data))
         if attributes[descr[i][0]][0] == 1 or attributes[descr[i][0]][0] == 0:
             number_features=list(fe.numFeatures(data,fixed_length,n_data))
        	    for values in number_features:
       	          attributes[descr[i][0]].append(values)
-            attributes[descr[i][0]].append(0)
-            attributes[descr[i][0]].append(0)
-            attributes[descr[i][0]].append(0)
-            attributes[descr[i][0]].append(0)
-            attributes[descr[i][0]].append(0)
-            attributes[descr[i][0]].append(0)
-            attributes[descr[i][0]].append(0)
+            attributes[descr[i][0]].append(0.0)
+            attributes[descr[i][0]].append(0.0)
+            attributes[descr[i][0]].append(0.0)
+            attributes[descr[i][0]].append(0.0)
+            attributes[descr[i][0]].append(0.0)
+            attributes[descr[i][0]].append(0.0)
+            attributes[descr[i][0]].append(0.0)
         else:	
-            attributes[descr[i][0]].append(0)
-            attributes[descr[i][0]].append(0)
-            attributes[descr[i][0]].append(0)
-            attributes[descr[i][0]].append(0)	
-            attributes[descr[i][0]].append(0)	
+            attributes[descr[i][0]].append(0.0)
+            attributes[descr[i][0]].append(0.0)
+            attributes[descr[i][0]].append(0.0)
+            attributes[descr[i][0]].append(0.0)	
+            attributes[descr[i][0]].append(0.0)	
             attributes[descr[i][0]].append(fe.WhiteSpaceFeature(data))
             attributes[descr[i][0]].append(fe.specialChars(data))
             attributes[descr[i][0]].append(fe.NumbertoAll(data))
@@ -177,7 +179,8 @@ for i in range (0,len(descr)):
 #for key,values in attributes.items():
     #print key,values
 
-#print attributes['state']
+print attributes['state']
+
 
 new_attributes = {}
 for k in attributes.keys():
@@ -188,3 +191,4 @@ print new_attributes
 pickle.dump(new_attributes,open("../Feature_Vectors/DataFeatures_Match.pickle",'wb'))
 
 print len(new_attributes)
+

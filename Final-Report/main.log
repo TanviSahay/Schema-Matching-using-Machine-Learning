@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.3.6)  3 MAY 2017 01:48
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.3.6)  3 MAY 2017 11:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -148,34 +148,43 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 ))
 \Gin@req@height=\dimen117
 \Gin@req@width=\dimen118
+)
+(./enumitem.sty
+Package: enumitem 2011/09/28 v3.5.2 Customized lists
+\labelindent=\skip44
+\enit@outerparindent=\dimen119
+\enit@toks=\toks16
+\enit@inbox=\box27
+\enitdp@description=\count110
 ) (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 352.
-LaTeX Font Info:    ... okay on input line 352.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 352.
-LaTeX Font Info:    ... okay on input line 352.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 352.
-LaTeX Font Info:    ... okay on input line 352.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 352.
-LaTeX Font Info:    ... okay on input line 352.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 352.
-LaTeX Font Info:    ... okay on input line 352.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 352.
-LaTeX Font Info:    ... okay on input line 352.
- (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 354.
+LaTeX Font Info:    ... okay on input line 354.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 354.
+LaTeX Font Info:    ... okay on input line 354.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 354.
+LaTeX Font Info:    ... okay on input line 354.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 354.
+LaTeX Font Info:    ... okay on input line 354.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 354.
+LaTeX Font Info:    ... okay on input line 354.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 354.
+LaTeX Font Info:    ... okay on input line 354.
+
+(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count110
-\scratchdimen=\dimen119
-\scratchbox=\box27
-\nofMPsegments=\count111
-\nofMParguments=\count112
-\everyMPshowfont=\toks16
-\MPscratchCnt=\count113
-\MPscratchDim=\dimen120
-\MPnumerator=\count114
-\makeMPintoPDFobject=\count115
-\everyMPtoPDFconversion=\toks17
+\scratchcounter=\count111
+\scratchdimen=\dimen120
+\scratchbox=\box28
+\nofMPsegments=\count112
+\nofMParguments=\count113
+\everyMPshowfont=\toks17
+\MPscratchCnt=\count114
+\MPscratchDim=\dimen121
+\MPnumerator=\count115
+\makeMPintoPDFobject=\count116
+\everyMPtoPDFconversion=\toks18
 ) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -225,25 +234,25 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 441.
+(Font)              <7> on input line 443.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 441.
+(Font)              <5> on input line 443.
 
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]
-Underfull \hbox (badness 1533) in paragraph at lines 503--504
+Underfull \hbox (badness 1533) in paragraph at lines 505--506
 \OT1/ptm/m/n/10 schema based and not in-stance based. In the pro-posed
  []
 
 
-Underfull \hbox (badness 1694) in paragraph at lines 513--513
+Underfull \hbox (badness 1694) in paragraph at lines 515--515
  \OT1/ptm/b/it/10 iMAP:Discovering Com-plex Se-man-tic Matches be-tween
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 516--517
+Underfull \hbox (badness 10000) in paragraph at lines 518--519
 
  []
 
@@ -257,27 +266,27 @@ Missing character: There is no ™ in font ptmr7t!
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 570--573
+Underfull \hbox (badness 10000) in paragraph at lines 572--575
 \OT1/ptm/m/it/10 Value\OT1/ptm/m/n/10 : Street Name, S[]Name, St[]Name, Str[]Na
 me,
  []
 
 
-Underfull \hbox (badness 2932) in paragraph at lines 570--573
+Underfull \hbox (badness 2932) in paragraph at lines 572--575
 \OT1/ptm/m/n/10 S[]Number, Street Num-ber, StNum-ber, StNo, Apt[]Num,
  []
 
 
-Underfull \hbox (badness 4454) in paragraph at lines 570--573
+Underfull \hbox (badness 4454) in paragraph at lines 572--575
 \OT1/ptm/m/n/10 Apart-ment[]Number, Apart-ment Num-ber, Apart-ment No,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 574--577
+Underfull \hbox (badness 10000) in paragraph at lines 576--579
 
  []
 
-(./main.bbl [3])
+[3] (./main.bbl)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -289,27 +298,25 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[4
-
-] (./main.aux) ) 
+[4] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 2351 strings out of 493029
- 37433 string characters out of 6136235
- 109391 words of memory out of 5000000
- 5879 multiletter control sequences out of 15000+600000
+ 2631 strings out of 493029
+ 42064 string characters out of 6136235
+ 115589 words of memory out of 5000000
+ 6156 multiletter control sequences out of 15000+600000
  38041 words of font info for 67 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
- 37i,8n,23p,1422b,211s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/
-utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (4 pages, 117946 bytes).
+ 37i,8n,23p,1422b,228s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</
+usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/time
+s/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on main.pdf (4 pages, 125017 bytes).
 PDF statistics:
  54 PDF objects out of 1000 (max. 8388607)
  38 compressed objects within 1 object stream

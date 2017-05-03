@@ -65,6 +65,8 @@
 %
 \documentclass[conference]{IEEEtran}
 \usepackage{blindtext, graphicx}
+\let\labelindent\relax
+\usepackage{enumitem}
 % Add the compsoc option for Computer Society conferences.
 %
 % If IEEEtran.cls has not been installed into the LaTeX system files,
@@ -579,27 +581,65 @@ As can be seen, the keys and values consist of all possible ways of representing
 
 \subsection{One To One Schema Matching}
 Once all one to many maps have been determined, we perform one to one matching on the remaining attributes.This is done by extracting meaningful descriptive features of each attribute and using these features to find similar attributes across the two schemas in consideration. After extracting features of each attribute, we have experimented with two methods, namely: Centroid Method and Combined Method. Each method has been evaluated using a measure called F-Score, which is a combination of both precision and recall. Each section of one to one schema matching has been explained below.
-\subsubsection{Feature Engineering and Feature Extraction}
-Features of an attribute are nothing but characteristics that decsribe the attribute in sufficient detail for it to be compared to other attributes and provide some idea of the similarity or dissimilarity between the compared attributes. These characteristics could either be based on the kind of data that attribute holds or based on schema information and specifications. Based on kind of data, these ``discriminants" can be data type, domain and range of data contained by the attribute, length of used space etc. and based on schema specifications, they can contain information about whether is attribute is a key or not and so on. Some of these features are binary, with values as either 0 or 1 while the others lie in the range [0,1]. We have adaptedd from and extended the feature set provided by \cite{ref1} to include a total of 20 ``discriminators". These discriminators are such that they allow us to 
-\begin{itemize}
-\item Features based on Schema Specification
-\begin{enumerate}
-\item Data Type
-\item Key constraint
-\item Unique constraint
-\item Not Null constraint
-\end{enumerate}
-\item Features based on Data Fields
-\begin{enumerate}
-\item Features for Numeric Data
-\item Features for Character Data
-\item Features common to both
-\end{enumerate}
-\end{itemize}
 
-\subsubsection{Clustering - Centroid Method}
-\subsubsection{Clustering - Combined Method}
-\subsubsection{Evaluation}
+\subsubsection*{\textbf{Feature Engineering and Feature Extraction}}
+Features of an attribute are nothing but characteristics that decsribe the attribute in sufficient detail for it to be compared to and discriminated against other attributes and provide some idea of the similarity or dissimilarity between the compared attributes. These characteristics could either be based on the kind of data that attribute holds or based on schema information and specifications. Based on kind of data, these ``discriminators" can be data type, domain and range of data contained by the attribute, length of used space etc. and based on schema specifications, they can contain information about whether the attribute is a key or not and so on. Some of these features are binary, with values as either 0 or 1 while the others lie in the range [0,1]. Representing each attribute as this set of real values has several advantages. First, it allows us to perform mathematical operations that cannot be generally performed on text, which makes similarity computation easier. Second, by creating features manually, we can decide which aspects of an attribute to focus on when finding similar attributes. We have adapted from the feature set provided by \cite{ref1} to include a total of 20 ``discriminators". This set of features is not exhaustive and based on need, database type and type of information available, more features can be added to the list.
+
+
+\textit{Features based on Schema Specification} - Based on schema information and specifications available, we create the following features: Type of data (Float, Int, Char, Boolean, date, time), length of fields provided by the user, whether the attribute is a key or not, whether the attribute is unique or not, whether the attribute has a Not Null condition attached to it or not. This information can be easily extracted from the schema specified by the user. For representation as a feature, we convert every value to a real number. For type of data, if the attribute is a float type, it is represented as 0 while if it is a time type, it is represented as 5. Length of the fields is already a real number and the remaining three attributes are provided a binary representation based on whether the attribute has a certain property or not (is a key - 1, not a key - 0 etc.).
+
+
+\textit{Features based on Data Fields} - A lot of discriminatory features can be extracted based on the data contained within a particular column. We divide the data into three types - containing only numerics and provided as INT or FLOAT (age, salary), containing only char and provided as CHAR (name, city) and containing both and provided as VARCHAR (address). We create features that help discriminate between the three categories. Since there are certain types of information that only be contained in numeric attributes and certain that are specific to VARCHAR attributes, we divide our features into the following categories. 
+
+\begin{enumerate}
+\item Features for Numeric Data - The features specific to numeric data are:
+\begin{itemize}[leftmargin=*]
+\item Average - Average of all the entries in a specific column
+\item Variance - Variance of a specific column. Variance is nothing but a measure of how far a set of values are spread from their mean.
+\item Coefficient of variance - Coefficient of variance is another measure of variability but it aims to describ the dispersion in a way that does not depend on the variable's unit of measurement.
+\item Minimum - The minimum value of a particular column
+\item Maximum - The maximum value of a particular column
+\end{itemize}
+\item Features for Character Data - The features specific to character data are:
+\begin{itemize}
+\item Ratio of whitespace to length - Number of white space characters as opposed to text characters
+\item Ratio of special characters to length - Number of special characters (`-', `\_', `(', `)', `$\setminus$' and so on) as opposed to text characters
+\item Ratio of numeric to length - Number of numeric characters as opposed to total number of characters
+\item Ratio of char to length - Number of plain text characters as opposed to total number of characters
+\item Ratio of backslash to length - Number of backslash characters as opposed to total number of characters
+\item Ratio of brackets to length - Number of brackets as opposed to total number of characters
+\item Ratio of hyphens to length -  Number of hyphens as opposed to total number of characters
+\end{itemize}
+\item Features common to both - Certain features are common to both numeric and varchar attributes.
+\begin{itemize}
+\item Average Used Length - Length of attribute used as opposed to total specified length
+\item Variance of Used length - Variance of the length used by values in a particular column
+\item Coefficient of variance of used length - Coefficient of variance of the length used by values in a particular column 
+\end{itemize} 
+\end{enumerate}
+
+For every attribute in both source and test schemas, a vector of length 20 is preapred that contains values for each of the 20 features decsribed above. To understand this with an example, consider the character attribute 
+
+\noindent
+$State (CHAR(2) PRIMARY KEY)$  from the test table as shown in table \ref{SP-main}. Its feature vector can be given as follows:
+
+\begin{table}[h]
+\begin{tabular}{|c|c|c|c|}
+Type of Data & 2 & \\
+Length & 2 & \\
+Key & 1 & \\
+Unique & 0 \\
+Not Null & 1 \\
+Average Length Used & 4.0 \\
+Variance of Length & 	
+
+\end{tabular}
+\end{table}
+
+\subsubsection*{\textbf{Clustering - Centroid Method}}
+\subsubsection*{\textbf{Clustering - Combined Method}}
+\subsubsection*{\textbf{Linguistic Matching}}
+\subsubsection*{\textbf{Evaluation}}
 
 \section{Experimentation and Results}
 

@@ -14,7 +14,7 @@ def Numberofbackslash(charAtt):
     for val in range(0,i):
         if(charAttribute[val]=="/"):
             count_space=count_space+1
-    ratio=count_space*1.0/i
+    ratio=(count_space*1.0)/i
     return round(ratio,4)
 
 def Numberofbrackets(charAtt):
@@ -24,7 +24,7 @@ def Numberofbrackets(charAtt):
     for val in range(0,i):
         if(charAttribute[val]=="("):
             count_space=count_space+1
-    ratio=count_space*1.0/i
+    ratio=(count_space*1.0)/i
     return round(ratio,4)
 
 def Numberofhyphen(charAtt):
@@ -34,7 +34,7 @@ def Numberofhyphen(charAtt):
     for val in range(0,i):
         if(charAttribute[val]=="-"):
             count_space=count_space+1
-    ratio=count_space*1.0/i
+    ratio=(count_space*1.0)/i
     return round(ratio,4)
 
 def NumbertoAll(charAtt):
@@ -48,7 +48,7 @@ def NumbertoAll(charAtt):
         except ValueError:
             continue
         val=val+1
-    ratio=count_integer*1.0/i
+    ratio=(count_integer*1.0)/i
     return round(ratio,4)
 
 def ChartoAll(charAtt):
@@ -61,7 +61,7 @@ def ChartoAll(charAtt):
         except ValueError:
             count_char=count_char+1
         val=val+1
-    ratio=count_char*1.0/i
+    ratio=(count_char*1.0)/i
     return round(ratio,4)
     
 def WhiteSpaceFeature(charAtt):
@@ -71,14 +71,16 @@ def WhiteSpaceFeature(charAtt):
     for val in range(0,i):
         if(charAttribute[val]==" "):
             count_space=count_space+1
-    ratio=count_space*1.0/i
+    ratio=(count_space*1.0)/i
     return round(ratio,4)
             
 fixed_length=100
 def averageusedlength(charAtt,n,fixed_length):
     charAttribute="".join(str(elm) for elm in charAtt)
     used_length=len(charAttribute)
-    ratio=used_length*1.0/n*fixed_length
+    ratio=(used_length*1.0)/(n*fixed_length)
+    print 'ratio--', ratio
+    print 'used_length--', used_length
     return round(ratio,4)
 
 #define used length array
@@ -110,7 +112,7 @@ def chartoLength(charAttribute):
     for char in charAttribute:
         if(char.isalpha()):
             count_char=count_char+1
-    ratio=count_char*1.0/i
+    ratio=(count_char*1.0)/i
     return round(ratio,4)
 
 def specialChars(charAtt):
@@ -122,7 +124,7 @@ def specialChars(charAtt):
             continue 
         else:
            count_special=count_special+1          
-    ratio=count_special*1.0/i
+    ratio=(count_special*1.0)/i
     return round(ratio,4)
 
 
@@ -136,7 +138,7 @@ def numFeatures(numArray,fixed_length,n):
             numArray[i]=0         
     for values in numArray:
         sum=sum+values
-    print sum,"zhjhdfgdfjhgdhg"
+    #print sum,"zhjhdfgdfjhgdhg"
     avg=sum/n
     var=np.var(numArray)/(n)
     coeff=scipy.stats.variation(numArray, axis=0)
