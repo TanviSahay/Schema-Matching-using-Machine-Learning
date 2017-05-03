@@ -474,7 +474,7 @@ Tanvi Sahay & 45cccc & PoliSci & 3xx & N Pleasant St\\
 
 Over the years, researchers have faced several issues when trying to automate the process of matching schemas of different relations. Because the schemas are created by human developers and are pertinent to a particular domain, human intervention is often required at one or multiple stages of the process to ensure proper schema matching, which makes this task quite labor intensive. The aim of automated schema matching is to reduce the involvement of a domain expert in the process to a minimum. Majorly, schema matching can be divided into two parts - one to one matching, where one attribute of table 1 matches with only one attribute of table 2 and one to many matching, where one attribute of table 1 may map to a combination of several attributes of table 2. While one to one matching has been successfully automated using sophisticated machine learning techniques as well as by exploiting the schema structure, performing one to many schema matching still requires some form of human intervention. In general, matching can be done by taking into account either the data contained in the relations or the name of the attributes or both.
 
-In this project, we explore two methods of performing one to one matching and suggest a new method of one to many mapping which is different from the ones that have been employed before. For one to one matching, we consider two appoaches, both based on utilizing a set of features to find similar attributes. In the first method, called centrid method, we cluster similar values of one table together into groups and compare each attribute of the second table with each cluster, to find the one that best matches with it. In the second method, called the combined method, we cluster attributes of both tables together to form groups containing fields from both tables. The centroid method, as we will see in the future sections, ensures that every attribute in the second table matches with at least one attribute in the first table. The combined approach on the other hand still has the possibility of an attribute in one table not matching with any other attribute in the second table. Each method will be discussed in more detail in the future sections and their tradeoffs as well as their performance with existing techniques will be compared as well. In addition to these techniques, we will discuss a new way of taking care of one to many matchings with minimum requirement of an external expert.
+In this project, we explore two methods of performing one to one matching and suggest a new method of one to many mapping which is different from the ones that have been employed before. For one to one matching, we consider two appoaches, both based on utilizing a set of features to limit the set of candidate matches by clustering similar attributes together. In the first method, called centroid method, we cluster similar values of one table together into groups and compare each attribute of the second table with each cluster, to find the cluster that best matches with it. In the second method, called the combined method, we combine attributes of both tables into a single list and cluster all of them together to form groups containing similar fields from both tables. The centroid method, as we will see in the future sections, ensures that every attribute in the second table matches with at least one attribute in the first table. The combined approach on the other hand still has the possibility of an attribute in one table not matching with any other attribute in the second table. Each method will be discussed in more detail in the future sections and their tradeoffs as well as their performance with existing techniques will be compared as well. In addition to these techniques, we will discuss a new way of taking care of one to many matchings with minimum requirement of an external expert.
 
 \section{Previous Work} 
 
@@ -522,16 +522,81 @@ As we have seen, the methods shown above either focus only on one to one mapping
 In this paper, authors have developed various searchers for different data types viz: text, number, date. For example: address = concat(city,state). It exploits the domain knowledge to improve the accuracy of the making searchers. 
 \fi
 
-
 \section{Methodology}
 For the purpose of implementation, we have divided our task into two separate sections: One to Many Mapping and One to One Mapping. In all discussions that follow, we assume that we have a source schema S and a test schema T and our task is to map attributes present in the test schema to attributes present in the source schema. 
 
+\subsection{Schema Data}
+For this project, we perform all experiments on a subset of the medicare.gov data. We take two tables from the database, each of which represents the ‘Inpatient Psychiatric Facility Quality Reports (IPFQR)’ of hospitals in the United States. One of the tables considers each hospital in the US and has a total of 85 attributes and 1644 data tuples with the field ``Provider$\_$number" taken as the primary key. The second table is the same data provided for only the best hospitals in each state, with State as the primary key. It has 74 attributes and 52 data tuples, one for each state and one for Washington DC and Puerto Rico each. Subsets of the two tables have been presented as Table \ref{HP-main} and Table \ref{SP-main} respectively. 
+
+\begin{table}[h]
+\centering
+\caption{IPFQR data - General}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Provider\_Number & State & HBIPS-2\_Overall\_Num & HIE\_Response\\
+\hline \hline
+10101 & AL & 23.7 & Yes\\
+40014 & AR & 1.47 & No\\
+34023 & AZ & 0.68 & Yes\\
+\hline
+\end{tabular}
+\label{HP-main}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{IPFQR data - Statewise}
+\begin{tabular}{|c|c|c|c|}
+\hline
+State & S\_HBIPS-2\_Overall\_Num & S\_HIE\_Yes\_Count & Start\_Date\\
+\hline \hline
+AL & 2891.1 & 17 & 01/01/2015\\
+AR & 844.77 & 10 & 01/01/2015\\
+AZ & 4981.36 & 14 & 01/01/2015\\
+\hline
+\end{tabular}
+\label{SP-main}
+\end{table}
+
+As can be seen from this small subset, the attributes are all domain centric and do not convey any semantic information about what the data contains, which is why any methods that match attributes semantically cannot be applied. 
+
+Both data tables are stored in a single database and postgres combined with python has been used to access the data. Before performing schema matching, the attributes are cleaned up to allow uniformity across the schemas. Symbols such as $\%$ occurring in the schema names are converted to their actual name i.e. \textit{percent}. Certain integer or float type columns have char values such as `Not Available' which are converted to 0 and symbols such as $\%$ occurring in the data are removed as well. While storing this data in the database, schemas are normalized by converting all names to lower case and appending \textit{`tr\_'} to the source schema attributes and \textit{`ts\_'} to the test schema attributes. This is done to provide the user with a clear demarcation of which schema attributes belong to which table.
+
 \subsection{One To Many Schema Matching}
-We propose to solve the one to many schema matching problem by creating a global dictionary of all possible mappings, with the parent attribute as key and all children attributes as their corresponding values. When a key is present in the source schema and the key's corresponding values are present in the test schema, that set of attributes is separated as a one to many schema mapping. Attributes in S and T that have already been considered as a part of any one to many match will not be considered when looking at the one to one schema matching.
+One to many matching is done when a single attribute in the source schema matches with two or more attributes in the test schema. For example, the address of an individual can either be represented as `Address' in a sigle column or be broken down into `House No' and `Street no/name' as two independent columns. For achieving one to many schema matching, we propose the creation of a global dictionary that contains all possible mappings of a single attribute to multiple attributes and use this as a checkpoint to find out possible one to many mappings. This dictionary is represented as a set of key-value pairs, where keys are those attributes that can be broken down into several smaller ones and values are the corresponding set of attributes that together match with the key. In the example given above, `Address' will be considered a key and `House No' and `Street no/name' will be its corresponding values. When a key is present in the source schema and the key's corresponding values are present in the test schema, that set of attributes is separated as a one to many schema mapping. Attributes in S and T that have already been considered as a part of any one to many match will not be considered when looking at the one to one schema matching. 
+
+The global dictionary created by us consists of the following key, value pairs:
+
+\noindent
+\textit{Key}: Address, Location, Addr, Loc, Residence\\
+\textit{Value}: Street Name, S\_Name, St\_Name, Str\_Name, Stree\_Name, StName, St\_No, ST\_Number, Street\_No, S\_No, S\_Number, Street Number, StNumber, StNo, Apt\_Num, Apartment\_Number, Apartment Number, Apartment No, Apt\_Number, Apt\_No
+
+\noindent
+\textit{Key}: Name, PatientName\\
+\textit{Value}: First Name, First\_Name, FName, F\_Name, Last\_Name, Last Name, LName, L\_Name\\
+
+As can be seen, the keys and values consist of all possible ways of representing a particular attribute in order to capture a wider range of mappings. While the dictionary only consists of two possible one to many mappings at present, it can be extended with time by including more instances of such mappings. 
 
 \subsection{One To One Schema Matching}
-One to One schema matching is done by extracting meaningful descriptive features of each attribute and using these features to find similar attributes across the two schemas in consideration. After extracting features of each attribute, we have experimented with two methods, namely: Centroid Method and Combined Method. Each method has been evaluated using a measure called F-Score, which is a combination of both precision and recall. Each section of one to one schema matching has been explained below.
+Once all one to many maps have been determined, we perform one to one matching on the remaining attributes.This is done by extracting meaningful descriptive features of each attribute and using these features to find similar attributes across the two schemas in consideration. After extracting features of each attribute, we have experimented with two methods, namely: Centroid Method and Combined Method. Each method has been evaluated using a measure called F-Score, which is a combination of both precision and recall. Each section of one to one schema matching has been explained below.
 \subsubsection{Feature Engineering and Feature Extraction}
+Features of an attribute are nothing but characteristics that decsribe the attribute in sufficient detail for it to be compared to other attributes and provide some idea of the similarity or dissimilarity between the compared attributes. These characteristics could either be based on the kind of data that attribute holds or based on schema information and specifications. Based on kind of data, these ``discriminants" can be data type, domain and range of data contained by the attribute, length of used space etc. and based on schema specifications, they can contain information about whether is attribute is a key or not and so on. Some of these features are binary, with values as either 0 or 1 while the others lie in the range [0,1]. We have adaptedd from and extended the feature set provided by \cite{ref1} to include a total of 20 ``discriminators". These discriminators are such that they allow us to 
+\begin{itemize}
+\item Features based on Schema Specification
+\begin{enumerate}
+\item Data Type
+\item Key constraint
+\item Unique constraint
+\item Not Null constraint
+\end{enumerate}
+\item Features based on Data Fields
+\begin{enumerate}
+\item Features for Numeric Data
+\item Features for Character Data
+\item Features common to both
+\end{enumerate}
+\end{itemize}
+
 \subsubsection{Clustering - Centroid Method}
 \subsubsection{Clustering - Combined Method}
 \subsubsection{Evaluation}

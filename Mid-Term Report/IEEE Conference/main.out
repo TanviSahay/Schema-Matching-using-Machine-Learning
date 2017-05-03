@@ -2,7 +2,7 @@
 \BOOKMARK [1][-]{section.2}{Related Work}{}% 2
 \BOOKMARK [2][-]{subsection.2.1}{Semantic Integration in Heterogenous Databases using Neural Networksref1}{section.2}% 3
 \BOOKMARK [2][-]{subsection.2.2}{Reconciling Schemas of Disparate Data Sources: A Machine Learning Approachref2}{section.2}% 4
-\BOOKMARK [2][-]{subsection.2.3}{Database Schema Matching Using Machine Learning with Feature Selectionref3}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.3}{•}{section.2}% 5
 \BOOKMARK [1][-]{section.3}{Feature Extraction}{}% 6
 \BOOKMARK [1][-]{section.4}{One to One Schema Matching}{}% 7
 \BOOKMARK [2][-]{subsection.4.1}{Kohonen Self Organizing Maps SOM}{section.4}% 8
