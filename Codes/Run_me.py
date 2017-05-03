@@ -15,11 +15,11 @@ from sklearn.metrics import silhouette_score
 from normalise import Normalise
 
 #Training Data
-dataFeaturePath = '../Feature_Vectors/DataFeatures_Train.pickle'
+dataFeaturePath = '../Feature_Vectors/DataFeatures_Train_17.pickle'
 DataFeatures = pickle.load(open(dataFeaturePath, 'rb'))
 
 #Test Data
-testFeaturesPath = '../Feature_Vectors/DataFeatures_Match.pickle'
+testFeaturesPath = '../Feature_Vectors/DataFeatures_Match_17.pickle'
 TestFeatures = pickle.load(open(testFeaturesPath,'rb'))
 
 Train_set = [k for k in DataFeatures.keys()]
@@ -123,7 +123,7 @@ y = input('enter y value for grid: ')
 iteration = input("Input number of iterations: ")
 
 #Create a SOM
-som = MiniSom(x,y,20,sigma=0.3, learning_rate=0.5)
+som = MiniSom(x,y,17,sigma=0.3, learning_rate=0.5)
 print "Training..."
 som.train_random(Features, iteration) # trains the SOM with 100 iterations
 print "...ready!"	
@@ -150,7 +150,7 @@ for i in range(0,len(all_attributes)):
 
 #print attribute_cluster[]
 
-pickle.dump(attribute_clusters,open('../Results/FinalSOM_with_normal_' + str(int(x*y)) + '.pickle','w'))
+pickle.dump(attribute_clusters,open('../Results/17_FinalSOM_with_normal_' + str(int(x*y)) + '.pickle','w'))
 #output_file = open('FinalSOM_with_normal_' + int(x*y) + '.txt', 'w')
 
 

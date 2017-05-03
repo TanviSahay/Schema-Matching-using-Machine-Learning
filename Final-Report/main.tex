@@ -66,7 +66,9 @@
 \documentclass[conference]{IEEEtran}
 \usepackage{blindtext, graphicx}
 \let\labelindent\relax
-\usepackage{enumitem}
+\usepackage{enumitem, amsmath}
+
+\pagenumbering{arabic}
 % Add the compsoc option for Computer Society conferences.
 %
 % If IEEEtran.cls has not been installed into the LaTeX system files,
@@ -474,7 +476,7 @@ Tanvi Sahay & 45cccc & PoliSci & 3xx & N Pleasant St\\
 \end{table}
 
 
-Over the years, researchers have faced several issues when trying to automate the process of matching schemas of different relations. Because the schemas are created by human developers and are pertinent to a particular domain, human intervention is often required at one or multiple stages of the process to ensure proper schema matching, which makes this task quite labor intensive. The aim of automated schema matching is to reduce the involvement of a domain expert in the process to a minimum. Majorly, schema matching can be divided into two parts - one to one matching, where one attribute of table 1 matches with only one attribute of table 2 and one to many matching, where one attribute of table 1 may map to a combination of several attributes of table 2. While one to one matching has been successfully automated using sophisticated machine learning techniques as well as by exploiting the schema structure, performing one to many schema matching still requires some form of human intervention. In general, matching can be done by taking into account either the data contained in the relations or the name of the attributes or both.
+Over the years, researchers have faced several issues when trying to automate the process of matching schemas of different relations. Because the schemas are created by human developers and are pertinent to a particular domain, human intervention is often required at one or multiple stages of the process to ensure proper schema matching, which makes this task quite labor intensive. The aim of automated schema matching is to reduce the involvement of a domain expert in the process to a minimum. Majorly, schema matching can be divided into two parts - one to one matching, where one attribute of table 1 matches with only one attribute of table 2 and one to many matching, where one attribute of table 1 may map to a combination of several attributes of table 2. In the above tables, (`Major',`Maj\_Stream') is a one-to-one matching and (`Address',[`House No',`St Name']) is a one to many matching. While one to one matching has been successfully automated using sophisticated machine learning techniques as well as by exploiting the schema structure, performing one to many schema matching still requires some form of human intervention. In general, matching can be done by taking into account either the data contained in the relations or the name of the attributes or both.
 
 In this project, we explore two methods of performing one to one matching and suggest a new method of one to many mapping which is different from the ones that have been employed before. For one to one matching, we consider two appoaches, both based on utilizing a set of features to limit the set of candidate matches by clustering similar attributes together. In the first method, called centroid method, we cluster similar values of one table together into groups and compare each attribute of the second table with each cluster, to find the cluster that best matches with it. In the second method, called the combined method, we combine attributes of both tables into a single list and cluster all of them together to form groups containing similar fields from both tables. The centroid method, as we will see in the future sections, ensures that every attribute in the second table matches with at least one attribute in the first table. The combined approach on the other hand still has the possibility of an attribute in one table not matching with any other attribute in the second table. Each method will be discussed in more detail in the future sections and their tradeoffs as well as their performance with existing techniques will be compared as well. In addition to these techniques, we will discuss a new way of taking care of one to many matchings with minimum requirement of an external expert.
 
@@ -528,7 +530,7 @@ In this paper, authors have developed various searchers for different data types
 For the purpose of implementation, we have divided our task into two separate sections: One to Many Mapping and One to One Mapping. In all discussions that follow, we assume that we have a source schema S and a test schema T and our task is to map attributes present in the test schema to attributes present in the source schema. 
 
 \subsection{Schema Data}
-For this project, we perform all experiments on a subset of the medicare.gov data. We take two tables from the database, each of which represents the ‘Inpatient Psychiatric Facility Quality Reports (IPFQR)’ of hospitals in the United States. One of the tables considers each hospital in the US and has a total of 85 attributes and 1644 data tuples with the field ``Provider$\_$number" taken as the primary key. The second table is the same data provided for only the best hospitals in each state, with State as the primary key. It has 74 attributes and 52 data tuples, one for each state and one for Washington DC and Puerto Rico each. Subsets of the two tables have been presented as Table \ref{HP-main} and Table \ref{SP-main} respectively. 
+For this project, we perform all experiments on a subset of the medicare.gov data. We take two tables from the database, each of which represents the ‘Inpatient Psychiatric Facility Quality Reports (IPFQR)’ of hospitals in the United States. One of the tables considers each hospital in the US and has a total of 85 attributes and 1644 data tuples with the field ``Provider$\_$number" taken as the primary key. The second table is the same data provided for only the best hospitals in each state, with State as the primary key. It has 74 attributes and 52 data tuples, one for each state and one for Washington DC and Puerto Rico each. Subsets of the two tables have been presented as Table \ref{HP-main} and Table \ref{SP-main} respectively. For all experiments, we have taken the first table i.e. the table containing all hospitals to be the source schema S and the second table to be the test schema T.
 
 \begin{table}[h]
 \centering
@@ -583,10 +585,11 @@ As can be seen, the keys and values consist of all possible ways of representing
 Once all one to many maps have been determined, we perform one to one matching on the remaining attributes.This is done by extracting meaningful descriptive features of each attribute and using these features to find similar attributes across the two schemas in consideration. After extracting features of each attribute, we have experimented with two methods, namely: Centroid Method and Combined Method. Each method has been evaluated using a measure called F-Score, which is a combination of both precision and recall. Each section of one to one schema matching has been explained below.
 
 \subsubsection*{\textbf{Feature Engineering and Feature Extraction}}
+
 Features of an attribute are nothing but characteristics that decsribe the attribute in sufficient detail for it to be compared to and discriminated against other attributes and provide some idea of the similarity or dissimilarity between the compared attributes. These characteristics could either be based on the kind of data that attribute holds or based on schema information and specifications. Based on kind of data, these ``discriminators" can be data type, domain and range of data contained by the attribute, length of used space etc. and based on schema specifications, they can contain information about whether the attribute is a key or not and so on. Some of these features are binary, with values as either 0 or 1 while the others lie in the range [0,1]. Representing each attribute as this set of real values has several advantages. First, it allows us to perform mathematical operations that cannot be generally performed on text, which makes similarity computation easier. Second, by creating features manually, we can decide which aspects of an attribute to focus on when finding similar attributes. We have adapted from the feature set provided by \cite{ref1} to include a total of 20 ``discriminators". This set of features is not exhaustive and based on need, database type and type of information available, more features can be added to the list.
 
 
-\textit{Features based on Schema Specification} - Based on schema information and specifications available, we create the following features: Type of data (Float, Int, Char, Boolean, date, time), length of fields provided by the user, whether the attribute is a key or not, whether the attribute is unique or not, whether the attribute has a Not Null condition attached to it or not. This information can be easily extracted from the schema specified by the user. For representation as a feature, we convert every value to a real number. For type of data, if the attribute is a float type, it is represented as 0 while if it is a time type, it is represented as 5. Length of the fields is already a real number and the remaining three attributes are provided a binary representation based on whether the attribute has a certain property or not (is a key - 1, not a key - 0 etc.).
+\textit{Features based on Schema Specification} - Based on schema information and specifications available, we create the following features: Type of data (Float, Int, Char, Boolean, date, time), length of fields provided by the user, whether the attribute is a key or not, whether the attribute has a unique condition or not, whether the attribute has a Not Null condition attached to it or not. This information can be easily extracted from the schema specified by the user. The UNIQUE constraint is considered only when it is specifically given i.e. when an attribute is not a key but is unique. For representation as a feature, we convert every value to a real number. For type of data, if the attribute is a float type, it is represented as 0 while if it is a time type, it is represented as 5. Length of the fields is already a real number and the remaining three attributes are provided a binary representation based on whether the attribute has a certain property or not (is a key - 1, not a key - 0 etc.).
 
 
 \textit{Features based on Data Fields} - A lot of discriminatory features can be extracted based on the data contained within a particular column. We divide the data into three types - containing only numerics and provided as INT or FLOAT (age, salary), containing only char and provided as CHAR (name, city) and containing both and provided as VARCHAR (address). We create features that help discriminate between the three categories. Since there are certain types of information that only be contained in numeric attributes and certain that are specific to VARCHAR attributes, we divide our features into the following categories. 
@@ -618,30 +621,107 @@ Features of an attribute are nothing but characteristics that decsribe the attri
 \end{itemize} 
 \end{enumerate}
 
-For every attribute in both source and test schemas, a vector of length 20 is preapred that contains values for each of the 20 features decsribed above. To understand this with an example, consider the character attribute 
+For every attribute in both source and test schemas, a vector of length 20 is prepared that contains values for each of the 20 features decsribed above. To understand this with an example, consider the character attribute 
 
 \noindent
-$State (CHAR(2) PRIMARY KEY)$  from the test table as shown in table \ref{SP-main}. Its feature vector can be given as follows:
+\begin{align*}
+ts\_state (CHAR(2)\ \ PRIMARY\ KEY)  
+\end{align*}
+
+\noindent
+from the test table as shown in table \ref{SP-main}. Its feature vector has been shown in table \ref{features}:
 
 \begin{table}[h]
+\centering
+\caption{Features of attribute `ts\_state'}
 \begin{tabular}{|c|c|c|c|}
-Type of Data & 2 & \\
-Length & 2 & \\
-Key & 1 & \\
-Unique & 0 \\
-Not Null & 1 \\
-Average Length Used & 4.0 \\
-Variance of Length & 	
-
+\hline
+Type of Data & 2 & Coeff of variance & 0.0\\
+Length & 2 & Minimum & 0.0\\
+Key & 1 & Maximum & 0.0\\
+Unique & 0 & No of Whitespace & 0.0\\
+Not Null & 1 & No of Special Char & 0.0\\
+Average Length Used & 1.0 & Ratio of numerics & 0.0\\
+Variance of Length & 0.0 & Ratio of chars & 1.0\\	
+Var Coeff of Length & 0.0 & No of backslach & 0.0\\
+Average & 0.0 & No of brackets & 0.0\\
+Variance & 0.0 & No of hyphens & 0.0\\
+\hline
 \end{tabular}
+\label{features}
 \end{table}
 
-\subsubsection*{\textbf{Clustering - Centroid Method}}
-\subsubsection*{\textbf{Clustering - Combined Method}}
-\subsubsection*{\textbf{Linguistic Matching}}
-\subsubsection*{\textbf{Evaluation}}
+Once features of each attribute have been extracted, we cluster similar attributes together using the methods explained in the following sections.
 
+\subsubsection*{\textbf{Clustering and Linguistic Matching - Centroid Method}}
+
+In the first approach, we cluster similar attributes of source schema together, essentially constraining the match search space for every test schema attribute.  For grouping alike attributes, a Kohonen Self Organising map has been used. It can be explained as follows:
+
+\textit{Self Organising Map: }A Kohonen Self-Organizing Map(SOM) is a type of Artificial Neural Network which is trained using unsupervised learning method in such a way that similar patterns in the input data are clustered together. A general architecture of the map has been shown in Figure 1, with the input layer having N nodes and the output layer having M nodes. Each output neuron is connected with every neuron in the input layer and each connection has a weight associated with it. For each input feature, a single output neuron is fired such that the weight vector associated with this neuron is closest to that input vector. Weights of all neurons near this activated neuron, including its own, are updated in such a way that it brings them closer to the input feature vector. Over several iterations, these weights are learned by the network and for any new input, the neuron with the weight vector closest to it is chosen as its class.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.4]{1.jpeg}
+\end{figure}
+
+For clustering, the input provided to SOM is a size 20 feature vector with number of examples equal to number of attributes in the source schema. Once the clusters have been prepared using SOM, a centroid of each cluster is calculated. Centroid of a cluster is the average of all the feature vectors present in that cluster. To determine which set of source attributes a test attribute should be compared with, the euclidean distance of each test attribute with every cluster centroid is found. A test attribute $t_s$, only attempts to find one-to-one matches in the cluster whose centroid is closest to it and only that cluster of source attributes is considered as the candidate match space for $t_s$. Once a test attribute is assigned a search space, every candidate match in it is mapped to the test attribute linguistically and a similarity score is provided. 
+
+Linguistic matching simply means matching the actual names of the attributes with each other. We have done this using edit distance which is a way of quantifying how dissimilar two strings (e.g., words) are to one another by counting the minimum number of operations required to transform one string into the other. Each source-test attribute pair is provided a probability of matching based on how close the two strings (names of the attributes) are.
+
+Figure \ref{train_centroid} shows how a subset of source schema attributes have been clustered using SOM. Figure \ref{test_centroid} shows how test attributes have been matched to their closest closest.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.25]{tr.jpeg}
+\caption{Source attributes clustered using Centroid Method}
+\label{train_centroid}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.25]{test.jpeg}
+\caption{Test attributes clustered using Centroid Method}
+\label{test_centroid}
+\end{figure}
+
+\subsubsection*{\textbf{Clustering and Linguistic Matching - Combined Method}}
+In this second approach, instead of only clustering similar attributes in the source schema and comparing centroids with the test attribute, we combine all attributes from both the schemas together and then apply clustering. Thus, input to SOM is a size 20 feature vector with number of examples equal to number of fields in source schema plus number of fields in test schema. For every cluster, we separate the source and test attributes and then for every test attribute in that cluster, we calculate its edit distance with every source attribute present in that cluster. Linguistic Matching cannot be applied to clusters having only train or test attributes because it shows that there is no mapping available for them. 
+
+Figure \ref{combined} shows how a combination of test and source schema attributes have been clusteres together using SOM.\\
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.25]{combined.jpeg}
+\caption{Attributes clusteres using Combined Method}
+\label{combined}
+\end{figure}
+
+\vspace{5em}
+\subsubsection*{\textbf{Evaluation}}
+For the purpose of assessment, we use F1-score to evaluate One to one Mappings obtained from Centroid and Combined method. F1 Score is an intrinsic cluster evaluation method to measure matching accuracy, which is the weighted average of precision and recall. Here, precision is the ratio of number of true positive results to the number of returned positive results and recall is the ratio of number of true positive results to the number of actual positive results.
+
+To calculate precision and recall, manual mappings are computed first. Once we have the manual mappings, we compute the values of true positives, which are the number of correct mappings returned by our method, false positives, which are the number of values that were returned as a true match but should not have been and false negatives, which are the number of values that were not returned as a match but should have been. Based on these values, F1 score is defined as: 
+\begin{equation}
+F1 = \frac{2 * Precision * Recall}{Precision + Recall}
+\end{equation}
+
+\noindent
+Where
+\begin{equation}
+Precision = \frac{True Positive}{True Positive + False Positive}
+\end{equation}
+
+\begin{equation}
+Recall = \frac{True Positive}{True Positive + False Negative}
+\end{equation}
+    
 \section{Experimentation and Results}
+We perform all experiments on source and test schemas defined in the previous section. Multiple methods have been explored at each step. For Features, different set of features have been chosen and extended with time. The features are dataset dependent and for a different dataset, a sifferent set of features may be extracted. For our particular dataset, we observed that inclusion of special character statistics played an important role in refining the obtained clusters. Thus, after choosing the standard set of features explained in \cite{ref1}, we added features pertaining to our dataset.
+
+The Next step was Mapping for different clustering methods, different distance methods have been used:
+Edit Distance: Distance between Test Attribute name to Training Attribute name.
+Euclidean Distance: Distance between representation of Test Attribute to Training Attribute Features.
+Cosine Distance: Geometric Distance Between Representation of Test Attribute to Train Attribute Features. 
 
 \section{Conclusion}
 
