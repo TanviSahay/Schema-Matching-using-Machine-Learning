@@ -1,19 +1,33 @@
+import warnings
+warnings.filterwarnings("ignore")
 import os, numpy, csv
 from minisom import MiniSom
 import pickle
 from scipy.spatial import distance
 from sklearn.metrics import silhouette_score
 import editdistance
+from sklearn.metrics.pairwise import cosine_similarity
 
 
 def calculate_edit_distance(test_name , train_names_features):
     # Calculating edit distance of a test attribute from all train attributes.
         edit_distance[test_name] = {} 
         for name in train_names_features:
-                edit_distance[test_name][name] = editdistance.eval(test_name, name)      
+                edit_distance[test_name][name] = editdistance.eval(test_name, name)  
+                
 
-def cal_probability(name):
-     file_path = open('../Results/Distances/edit_centroid_' + name + '.csv','w')
+def cosine_euc_distance(test_name,test_feature, train_name_features):
+    # Calculating cosine and euclidean distance of a test attribute from all train attributes. 
+         
+          cosine_distance[test_name] = {}
+          euc_distance[test_name] = {}
+          for name in train_name_features.keys():
+              cosine_distance[test_name][name] = cosine_similarity(test_feature, train_name_features[name])[0][0]
+              euc_distance[test_name][name] = distance.euclidean(test_feature, train_name_features[name])
+                                  
+
+def cal_probability(distance_dic,name):
+     file_path = open('../Results/Distances/All_distances/centroid_' + name + '.csv','w')
      Out = csv.writer(file_path,delimiter=',')
      
      new_row = ['test_attribute' , 'train_attribute' , 'distance', 'probability']
@@ -31,7 +45,12 @@ def cal_probability(name):
 
 
 global edit_distance
-edit_distance = {}    
+global cosine_distance
+global euc_distance
+
+edit_distance = {}
+cosine_distance = {}
+euc_distance = {}   
 
  
 #Training Data
@@ -49,8 +68,8 @@ for val in DataFeatures.values():
 
 
 #(x,y) -- size of output grid for SOM
-x = 7
-y = 7
+x = 5
+y = 5
 #Number of iterations to run
 iteration = input("Input number of iterations: ")
 
@@ -72,7 +91,7 @@ for i in range(x):
 
 #Open a csv file to write the attribute name and its corresponding cluster id
 #print 'attribute			Spatial Position'
-out_file_path = '../Results/Centroid_Clustering_Result/AttributeCluster_centroid_'+ str(x*y) + '_itr' + str(iteration) + '.csv'
+out_file_path = '../Results/Centroid_Clustering_Result/final_AttributeCluster_centroid_'+ str(x*y) + '_itr' + str(iteration) + '.csv'
 out_file = open(out_file_path,'w')
 output_file = csv.writer(out_file, delimiter = ',')
 output_file.writerow(["Attribute", "Cluster ID"])
@@ -94,7 +113,7 @@ for k in DataFeatures.keys():
 out_file.close()
 
 #Open the output file for test data clusters
-out_file_path_test = '../Results/Centroid_Clustering_Result/CentroidDistance_20_'+ str(x*y) + '_itr' + str(iteration) +'.csv'
+out_file_path_test = '../Results/Centroid_Clustering_Result/final_CentroidDistance_20_'+ str(x*y) + '_itr' + str(iteration) +'.csv'
 out_file = open(out_file_path_test,'w')
 output_file = csv.writer(out_file, delimiter = ',')
 output_file.writerow(["Attribute", "Cluster ID"])
@@ -149,17 +168,23 @@ print silhouetteScore
 for key, value in test_cluster.items():
     output_file.writerow([key,value])
     
-    
-train_names_features = []
+
 for key,val in test_cluster.items():
    
+      train_names = []
+      train_name_features = {}
       for k, v in attribute_cluster.items():
           if val == v:
-             train_names_features.append(k)
-         
-      calculate_edit_distance(key,train_names_features)
+             train_names.append(k)
+             train_name_features[k] = DataFeatures[k] 
+             
+      calculate_edit_distance(key,train_names)
+      cosine_euc_distance(key,TestFeatures[key],train_name_features)
 
 
-cal_probability(str(x*y))
+cal_probability(edit_distance,'edit_' + str(x*y))
+cal_probability(cosine_distance,'cosine_' + str(x*y))
+cal_probability(euc_distance,'euc_' + str(x*y))
 
+print silhouetteScore
 
