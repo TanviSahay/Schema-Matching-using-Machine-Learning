@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.3.6)  4 MAY 2017 15:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.3.6)  4 MAY 2017 18:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -353,42 +353,50 @@ File: 1.jpeg Graphic file (type jpg)
 Package pdftex.def Info: 1.jpeg used on input line 664.
 (pdftex.def)             Requested size: 221.62407pt x 114.02397pt.
  [4 <./1.jpeg>]
-<tr.jpeg, id=25, 1024.82875pt x 556.0775pt>
+<sc.jpg, id=25, 642.4pt x 365.365pt>
+File: sc.jpg Graphic file (type jpg)
+ <use sc.jpg>
+Package pdftex.def Info: sc.jpg used on input line 705.
+(pdftex.def)             Requested size: 256.95544pt x 146.1434pt.
+
+Overfull \hbox (3.90558pt too wide) in paragraph at lines 705--706
+[][] 
+ []
+
+[5 <./sc.jpg>] <tr.jpeg, id=29, 1024.82875pt x 556.0775pt>
 File: tr.jpeg Graphic file (type jpg)
  <use tr.jpeg>
-Package pdftex.def Info: tr.jpeg used on input line 675.
+Package pdftex.def Info: tr.jpeg used on input line 769.
 (pdftex.def)             Requested size: 256.20656pt x 139.01903pt.
 
-Overfull \hbox (3.1567pt too wide) in paragraph at lines 675--676
+Overfull \hbox (3.1567pt too wide) in paragraph at lines 769--770
  [][] 
  []
 
-<test.jpeg, id=26, 1016.79875pt x 513.92pt>
+<test.jpeg, id=30, 1016.79875pt x 513.92pt>
 File: test.jpeg Graphic file (type jpg)
  <use test.jpeg>
-Package pdftex.def Info: test.jpeg used on input line 682.
+Package pdftex.def Info: test.jpeg used on input line 776.
 (pdftex.def)             Requested size: 254.19907pt x 128.47968pt.
 
-Overfull \hbox (1.1492pt too wide) in paragraph at lines 682--683
+Overfull \hbox (1.1492pt too wide) in paragraph at lines 776--777
  [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 690--691
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 781--782
 
  []
 
-<combined.jpeg, id=27, 998.73125pt x 551.05875pt>
+<combined.jpeg, id=31, 998.73125pt x 551.05875pt>
 File: combined.jpeg Graphic file (type jpg)
  <use combined.jpeg>
-Package pdftex.def Info: combined.jpeg used on input line 694.
+Package pdftex.def Info: combined.jpeg used on input line 785.
 (pdftex.def)             Requested size: 249.68219pt x 137.76434pt.
- [5 <./tr.jpeg> <./test.jpeg> <./combined.jpeg>]
-Underfull \hbox (badness 10000) in paragraph at lines 765--766
-[]\OT1/ptm/m/n/10 --different clus-ter sizes - edit,cosine,eucledian, -
- []
-
-(./main.bbl)
+ [6 <./tr.jpeg> <./test.jpeg> <./combined.jpeg>] (./main.bbl)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -400,29 +408,31 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[6] (./main.aux) ) 
+[7
+
+] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 3266 strings out of 493029
- 49244 string characters out of 6136235
- 126065 words of memory out of 5000000
- 6769 multiletter control sequences out of 15000+600000
+ 3273 strings out of 493029
+ 49324 string characters out of 6136235
+ 126081 words of memory out of 5000000
+ 6775 multiletter control sequences out of 15000+600000
  38495 words of font info for 69 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
  38i,11n,23p,1719b,228s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</
-usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/sh
-are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb
-i8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (6 pages, 592828 bytes).
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/u
+rw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8
+a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on main.pdf (7 pages, 634741 bytes).
 PDF statistics:
- 68 PDF objects out of 1000 (max. 8388607)
- 45 compressed objects within 1 object stream
+ 74 PDF objects out of 1000 (max. 8388607)
+ 49 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -537,7 +537,7 @@ For this project, we perform all experiments on a subset of the medicare.gov dat
 \caption{IPFQR data - General}
 \begin{tabular}{|c|c|c|c|}
 \hline
-Provider\_Number & State & HBIPS-2\_Overall\_Num & HIE\_Response\\
+tr\_provider\_number & tr\_state & tr\_hbips\_2\_overall\_num & tr\_hie\_response\\
 \hline \hline
 10101 & AL & 23.7 & Yes\\
 40014 & AR & 1.47 & No\\
@@ -552,7 +552,7 @@ Provider\_Number & State & HBIPS-2\_Overall\_Num & HIE\_Response\\
 \caption{IPFQR data - Statewise}
 \begin{tabular}{|c|c|c|c|}
 \hline
-State & S\_HBIPS-2\_Overall\_Num & S\_HIE\_Yes\_Count & Start\_Date\\
+ts\_state & ts\_s\_hbips\_2\_overall\_num & ts\_s\_hie\_yes\_count & ts\_start\_date\\
 \hline \hline
 AL & 2891.1 & 17 & 01/01/2015\\
 AR & 844.77 & 10 & 01/01/2015\\
@@ -655,46 +655,28 @@ Once features of each attribute have been extracted, we cluster similar attribut
 
 \subsubsection*{\textbf{Clustering and Linguistic Matching - Centroid Method}}
 
-In the first approach, we cluster similar attributes of source schema together, essentially constraining the match search space for every test schema attribute.  For grouping alike attributes, a Kohonen Self Organising map has been used. It can be explained as follows:
+In the first approach, we cluster similar attributes of source schema together, essentially constraining the match search space for every test schema attribute.  For grouping alike attributes, we experiment with two different clustering methods: Kohonen Self Organising map and K-Means Clustering. Both have been explained as follows:
 
-\textit{Self Organising Map: }A Kohonen Self-Organizing Map(SOM) is a type of Artificial Neural Network which is trained using unsupervised learning method in such a way that similar patterns in the input data are clustered together. A general architecture of the map has been shown in Figure 1, with the input layer having N nodes and the output layer having M nodes. Each output neuron is connected with every neuron in the input layer and each connection has a weight associated with it. For each input feature, a single output neuron is fired such that the weight vector associated with this neuron is closest to that input vector. Weights of all neurons near this activated neuron, including its own, are updated in such a way that it brings them closer to the input feature vector. Over several iterations, these weights are learned by the network and for any new input, the neuron with the weight vector closest to it is chosen as its class.
+\textit{Self Organising Map: }A Kohonen Self-Organizing Map(SOM) is a type of Artificial Neural Network which is trained using unsupervised learning method in such a way that similar patterns in the input data are clustered together. A general architecture of the map has been shown in Figure 1, with the input layer having N nodes and the output layer having M nodes. Each output neuron is connected with every neuron in the input layer and each connection has a weight associated with it. For each input feature, a single output neuron is fired such that the weight vector associated with this neuron is closest to that input vector. Weights of all neurons near this activated neuron, including its own, are updated in such a way that it brings them closer to the input feature vector. Over several iterations, these weights are learned by the network and for any new input, the neuron with the weight vector closest to it is chosen as its class. For clustering, the input provided to SOM is a size 20 feature vector with number of examples equal to number of attributes in the source schema. Maximum clusters possible are equal to the number of output neurons. They can either be decided manually or chosen programatically. 
 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.4]{1.jpeg}
 \end{figure}
 
-For clustering, the input provided to SOM is a size 20 feature vector with number of examples equal to number of attributes in the source schema. Once the clusters have been prepared using SOM, a centroid of each cluster is calculated. Centroid of a cluster is the average of all the feature vectors present in that cluster. To determine which set of source attributes a test attribute should be compared with, the euclidean distance of each test attribute with every cluster centroid is found. A test attribute $t_s$, only attempts to find one-to-one matches in the cluster whose centroid is closest to it and only that cluster of source attributes is considered as the candidate match space for $t_s$. Once a test attribute is assigned a search space, every candidate match in it is mapped to the test attribute linguistically and a similarity score is provided. 
+
+\textit{K-Means Clustering: }K-means is an iterative optimization algorithm for clustering that alternates between two steps. It randomly initializes k cluster centroids in a vector space D, with N data cases. From there on it repeats the following two steps until convergence: a) For each data point $x_i$ in X, find the nearest
+centroid (cluster) to it (using Euclidean distance). Assign this data point to that cluster. b) For each of the clusters formed in step a), find the new centroids for each them, by finding out the mean in each of the clusters. Repeat step a) again. For our case, N data points, each of vector size equal to 20 and N equal to number of attributes in source schema are provided as input to the KMeans algorithm. 
+
+For both clustering schemes, 7 cluster sizes are chosen and the best out of these is chosen by comparing their silhouette scores. Silhouette scoring is a measure of how similar an object is to its own cluster as opposed to other clusters. The method gives each clustering a score between -1 and 1, with values closer to 1 representing better clustering.
+
+
+Once the clusters have been prepared, a centroid of each cluster is calculated. Centroid of a cluster is the average of all the feature vectors present in that cluster. To determine which set of source attributes a test attribute should be compared with, the euclidean distance of each test attribute with every cluster centroid is found. A test attribute $t_s$, only attempts to find one-to-one matches in the cluster whose centroid is closest to it and only that cluster of source attributes is considered as the candidate match space for $t_s$. Once a test attribute is assigned a search space, every candidate match in it is mapped to the test attribute linguistically and a similarity score is provided. 
 
 Linguistic matching simply means matching the actual names of the attributes with each other. We have done this using edit distance which is a way of quantifying how dissimilar two strings (e.g., words) are to one another by counting the minimum number of operations required to transform one string into the other. Each source-test attribute pair is provided a probability of matching based on how close the two strings (names of the attributes) are.
 
-Figure \ref{train_centroid} shows how a subset of source schema attributes have been clustered using SOM. Figure \ref{test_centroid} shows how test attributes have been matched to their closest closest.
-
-\begin{figure}[h]
-\centering
-\includegraphics[scale=0.25]{tr.jpeg}
-\caption{Source attributes clustered using Centroid Method}
-\label{train_centroid}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[scale=0.25]{test.jpeg}
-\caption{Test attributes clustered using Centroid Method}
-\label{test_centroid}
-\end{figure}
-
 \subsubsection*{\textbf{Clustering and Linguistic Matching - Combined Method}}
-In this second approach, instead of only clustering similar attributes in the source schema and comparing centroids with the test attribute, we combine all attributes from both the schemas together and then apply clustering. Thus, input to SOM is a size 20 feature vector with number of examples equal to number of fields in source schema plus number of fields in test schema. For every cluster, we separate the source and test attributes and then for every test attribute in that cluster, we calculate its edit distance with every source attribute present in that cluster. Linguistic Matching cannot be applied to clusters having only train or test attributes because it shows that there is no mapping available for them. 
-
-Figure \ref{combined} shows how a combination of test and source schema attributes have been clusteres together using SOM.\\
-
-\begin{figure}
-\centering
-\includegraphics[scale=0.25]{combined.jpeg}
-\caption{Attributes clusteres using Combined Method}
-\label{combined}
-\end{figure}
+In this second approach, instead of only clustering similar attributes in the source schema and comparing centroids with the test attribute, we combine all attributes from both the schemas together and then apply clustering. Thus, input to the clustering method is a size 20 feature vector with number of examples equal to number of fields in source schema plus number of fields in test schema. For every cluster, we separate the source and test attributes and then for every test attribute in that cluster, we calculate its edit distance with every source attribute present in that cluster. Linguistic Matching cannot be applied to clusters having only train or test attributes because it shows that there is no mapping available for them. 
 
 \subsubsection*{\textbf{Evaluation}}
 For the purpose of assessment, we use F1-score to evaluate One to one Mappings obtained from Centroid and Combined method. F1 Score is an intrinsic cluster evaluation method to measure matching accuracy, which is the weighted average of precision and recall. Here, precision is the ratio of number of true positive results to the number of returned positive results and recall is the ratio of number of true positive results to the number of actual positive results.
@@ -717,7 +699,23 @@ Recall = \frac{True Positive}{True Positive + False Negative}
 \section{Experimentation and Results}
 We perform all experiments on source and test schemas defined in the previous section. Multiple methods have been explored at each step. For Features, different set of features have been chosen and extended with time. The features are dataset dependent and for a different dataset, a different set of features may be extracted. For our particular dataset, we observed that inclusion of special character statistics played an important role in refining the obtained clusters. Thus, after choosing the standard set of features explained in \cite{ref1}, we added features pertaining to our dataset. This improved our clusters, which was confirmed via manual observation. 
 
-Next, to perform intra-cluster one to one matching between test and source attribtues, we used two more methods in addition to edit distance. Euclidean Distance between the feature vectors of a test-source pair can be mathematically represented as:
+The second experiment we perform is with the clustering methods. For each of the two techniques, centroid and combined, we test SOM and K-Means clustering over a range of 7 clusters. Figures \ref{SOM_cluster}, \ref{KMeans_cluster} and show the values of silhouette scores for each cluster size for both centroid and combined techniques. 
+
+\begin{figure}[h]
+\includegraphics[scale=0.4]{sc.jpg}
+\caption{Silhouette scores versus number of clusters for SOM}
+\label{SOM_cluster}
+\end{figure}
+
+\begin{figure}[h]
+%\includegraphics[scale=0.5]{}
+\caption{Silhouette scores versus number of clusters for K-Means}
+\label{KMeans_cluster}
+\end{figure}
+
+Based on the results shown above, we can see that SOM performs slightly better than K-Means with the highest silhouette score for a cluster size of 40. We choose this as our optimal number of clusters and choose SOM as the clustering technique.
+
+Next, to perform intra-cluster one to one matching between test and source attributes, we use two more methods in addition to edit distance. Euclidean Distance between the feature vectors of a test-source pair can be mathematically represented as:
 
 \begin{equation}
 \sqrt{(s_1-t_1)^2 + (s_2-t_2)^2 + ... + (s_n-t_n)^2}
@@ -729,7 +727,7 @@ Here $s_i$ is the $i^{th}$ feature of a source attribute and $t_i$ is the $i^{th
 \frac{\sum_{i=1}^n{s_it_i}}{\sqrt{\sum_{i=1}^ns_i^2}\sqrt{\sum_{i=1}^nt_i^2}}
 \end{equation}
 
-For each of the two methods i.e. centroid and combined clustering methods, F1-scores were calculated using all three distance measures. The results have been compiled in tables \ref{results1} and \ref{results2} for centroid and combined methods respectively.
+For each of the two methods i.e. centroid and combined clustering methods, F1-scores are calculated using all three distance measures for cluster size 40. The results have been compiled in tables \ref{results1} and \ref{results2} for centroid and combined methods respectively.
 
 \begin{table}[h]
 \centering
@@ -749,7 +747,7 @@ Cosine Similarity & & &\\
 
 \begin{table}[h]
 \centering
-\caption{F1-scores for combined cethod}
+\caption{F1-scores for combined method}
 \begin{tabular}{|c|c|c|c|}
 \hline
 Distance Measure & Precision & Recall & F1 score\\
@@ -762,7 +760,35 @@ Cosine Similarity & & &\\
 \label{results2}
 \end{table}
 
- --different cluster sizes - edit,cosine,eucledian, -precision,recall and F-score.
+From the results above, we see that edit distance is a much better method of performing strict one-to-one mapping between source and test schema attributes.
+
+Figure \ref{train_centroid} shows how a subset of source schema attributes have been clustered using SOM. Figure \ref{test_centroid} shows how test attributes have been matched to their closest cluster.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.25]{tr.jpeg}
+\caption{Source attributes clustered using Centroid Method}
+\label{train_centroid}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.25]{test.jpeg}
+\caption{Test attributes clustered using Centroid Method}
+\label{test_centroid}
+\end{figure}
+
+Figure \ref{combined} shows how a combination of test and source schema attributes have been clusteres together using SOM.\\
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.25]{combined.jpeg}
+\caption{Attributes clusteres using Combined Method}
+\label{combined}
+\end{figure}
+
+All the results shown above have been found using edit distance.
+
 
 \section{Conclusion and Future Work}
 Schema matching is crucial for allowing data sharing or to maintain meaningful inter-operations between various systems. However, manual creation of schema matchings is a very labour intensive and tedious task and is prone to inclusion of human errors. At present, several research techniques have been proposed to decrease human involvement in one-to-one mapping and make most of them make use of machine learning methods to achieve their purpose. However, these methods require a lot of data to properly train the models as they either use pure supervised networks like naive bayes and logistic regression or a combination of unsupervised and supervised models. In this project, we have taken a different approach towards finding one-to-one schema matchings. Our methodology is based on a purely unsupervised mmodel of machine learning, which is to cluster similar attributes of a source table together and find linguistic mappings between source and test table attributes within each same cluster. A direct advantage of this method is that time required to find mappings between the two tables is reduced significantly, since rather than comparing every attribute of test table with that of train table, only attributes lying inside a particular cluster are taken as candidate matches. The method only has to bear a one-time cost of clustering similar attributes in the source table together. The first method i.e. centroid method performs worse than the combined method, with their respective scores of 0.60 and 0.75. While neither of the methods perform exceptionally well, taking into account the differences in the type and amount of data used, unbiased comparison with other methods is not possible. 
