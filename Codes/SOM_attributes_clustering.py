@@ -13,7 +13,7 @@ def calculate_edit_distance(test_name , train_names_features):
                 edit_distance[test_name][name] = editdistance.eval(test_name, name)      
 
 def cal_probability(name):
-     file_path = open('../Results/Distances/17_edit_centroid_' + name + '.csv','w')
+     file_path = open('../Results/Distances/edit_centroid_' + name + '.csv','w')
      Out = csv.writer(file_path,delimiter=',')
      
      new_row = ['test_attribute' , 'train_attribute' , 'distance', 'probability']
@@ -35,11 +35,11 @@ edit_distance = {}
 
  
 #Training Data
-dataFeaturePath = '../Feature_Vectors/normalised_features_train_17.pickle'
+dataFeaturePath = '../Feature_Vectors/normalised_features_train.pickle'
 DataFeatures = pickle.load(open(dataFeaturePath, 'rb'))
 
 #Test Data
-testFeaturesPath = '../Feature_Vectors/normalised_features_match_17.pickle'
+testFeaturesPath = '../Feature_Vectors/normalised_features_match.pickle'
 TestFeatures = pickle.load(open(testFeaturesPath,'rb'))
 
 #List of all features in training data
@@ -55,7 +55,7 @@ y = 7
 iteration = input("Input number of iterations: ")
 
 #Create a SOM
-som = MiniSom(x,y,17,sigma=0.3, learning_rate=0.5)
+som = MiniSom(x,y,20,sigma=0.3, learning_rate=0.5)
 print "Training..."
 som.train_random(Features, iteration) # trains the SOM with 100 iterations
 print "...ready!"
@@ -72,7 +72,7 @@ for i in range(x):
 
 #Open a csv file to write the attribute name and its corresponding cluster id
 #print 'attribute			Spatial Position'
-out_file_path = '../Results/Centroid_Clustering_Result/17_AttributeCluster_centroid_'+ str(x*y) + '_itr' + str(iteration) + '.csv'
+out_file_path = '../Results/Centroid_Clustering_Result/AttributeCluster_centroid_'+ str(x*y) + '_itr' + str(iteration) + '.csv'
 out_file = open(out_file_path,'w')
 output_file = csv.writer(out_file, delimiter = ',')
 output_file.writerow(["Attribute", "Cluster ID"])
@@ -94,7 +94,7 @@ for k in DataFeatures.keys():
 out_file.close()
 
 #Open the output file for test data clusters
-out_file_path_test = '../Results/Centroid_Clustering_Result/17_CentroidDistance_20_'+ str(x*y) + '_itr' + str(iteration) +'.csv'
+out_file_path_test = '../Results/Centroid_Clustering_Result/CentroidDistance_20_'+ str(x*y) + '_itr' + str(iteration) +'.csv'
 out_file = open(out_file_path_test,'w')
 output_file = csv.writer(out_file, delimiter = ',')
 output_file.writerow(["Attribute", "Cluster ID"])
