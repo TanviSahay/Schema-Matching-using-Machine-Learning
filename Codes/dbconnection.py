@@ -159,9 +159,9 @@ for i in range (0,len(descr)):
             attributes[descr[i][0]].append(0.0)
             attributes[descr[i][0]].append(0.0)
             attributes[descr[i][0]].append(0.0)
-#            attributes[descr[i][0]].append(0.0)
-#            attributes[descr[i][0]].append(0.0)
-#            attributes[descr[i][0]].append(0.0)
+            attributes[descr[i][0]].append(0.0)
+            attributes[descr[i][0]].append(0.0)
+            attributes[descr[i][0]].append(0.0)
         else:	
             attributes[descr[i][0]].append(0.0)
             attributes[descr[i][0]].append(0.0)
@@ -172,9 +172,9 @@ for i in range (0,len(descr)):
             attributes[descr[i][0]].append(fe.specialChars(data))
             attributes[descr[i][0]].append(fe.NumbertoAll(data))
             attributes[descr[i][0]].append(fe.ChartoAll(data))
-#            attributes[descr[i][0]].append(fe.Numberofbackslash(data))
-#            attributes[descr[i][0]].append(fe.Numberofbrackets(data))
-#            attributes[descr[i][0]].append(fe.Numberofhyphen(data))
+            attributes[descr[i][0]].append(fe.Numberofbackslash(data))
+            attributes[descr[i][0]].append(fe.Numberofbrackets(data))
+            attributes[descr[i][0]].append(fe.Numberofhyphen(data))
 
 #for key,values in attributes.items():
     #print key,values
@@ -188,7 +188,7 @@ for k in attributes.keys():
     new_attributes[key_val] = attributes[k]
 
 print new_attributes
-pickle.dump(new_attributes,open("../Feature_Vectors/DataFeatures_Train_17.pickle",'wb'))
+pickle.dump(new_attributes,open("../Feature_Vectors/DataFeatures_Train.pickle",'wb'))
 
 print len(new_attributes)
 

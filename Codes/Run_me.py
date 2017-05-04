@@ -6,6 +6,7 @@ This run me file integrates one to one and many to one mappings.
 
 import csv, pickle, numpy, os, re
 from distance import calculate_edit_distance
+from distance import cosine_euc_distance 
 from distance import cal_probability
 from minisom import MiniSom
 from scipy.spatial import distance
@@ -15,17 +16,20 @@ from sklearn.metrics import silhouette_score
 from normalise import Normalise
 
 #Training Data
-dataFeaturePath = '../Feature_Vectors/DataFeatures_Train_17.pickle'
+dataFeaturePath = '../Feature_Vectors/DataFeatures_Train.pickle'
 DataFeatures = pickle.load(open(dataFeaturePath, 'rb'))
 
 #Test Data
-testFeaturesPath = '../Feature_Vectors/DataFeatures_Match_17.pickle'
+testFeaturesPath = '../Feature_Vectors/DataFeatures_Match.pickle'
 TestFeatures = pickle.load(open(testFeaturesPath,'rb'))
 
 Train_set = [k for k in DataFeatures.keys()]
 Test_set = [k for k in TestFeatures.keys()]
 
 global edit_distance
+global cosine_distance
+global euc_distance
+
 
 #Global Dictionary mapping an attribute to possible smaller features (one --> many attributes)
 Global_Dictionary={}
@@ -123,7 +127,7 @@ y = input('enter y value for grid: ')
 iteration = input("Input number of iterations: ")
 
 #Create a SOM
-som = MiniSom(x,y,17,sigma=0.3, learning_rate=0.5)
+som = MiniSom(x,y,20,sigma=0.3, learning_rate=0.5)
 print "Training..."
 som.train_random(Features, iteration) # trains the SOM with 100 iterations
 print "...ready!"	
@@ -166,12 +170,14 @@ for cluster_id in attribute_clusters.values():
                 train_names_features[attribute] =  cluster_id[attribute]             
     
     edit_distance = calculate_edit_distance(test_names_features,train_names_features)
+    cosine_distance, euc_distance = cosine_euc_distance(test_names_features,train_names_features)
 
 
-OneToOne = 'FinalSOM_editDistance_48'
-cal_probability(edit_distance,OneToOne)
+cal_probability(edit_distance,'FinalSOM_edit_' + str(x*y))
+cal_probability(cosine_distance,'FinalSOM_cosine_' + str(x*y))
+cal_probability(euc_distance,'FinalSOM_euc_' + str(x*y))
+#print 'All one to one mappings saved in the file: ', OneToOne + '.csv'
 
-print 'All one to one mappings saved in the file: ', OneToOne + '.csv'
 
 '''
 output_file.write('One to Many Mappings: \nTrain Data		Test Data\n')

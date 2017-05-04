@@ -32,14 +32,18 @@ def cosine_euc_distance(test_names_features , train_name_features):
          cosine_distance[test_name] = {}
          euc_distance[test_name] = {}
          
-         for name in train_names_features.keys():
-              cosine_distance[test_name][name] = cosine_similarity(test_names_features[test_name], train_names_features[name])[0][0]
-              euc_distance[test_name][name] = distance.euclidean(test_names_features[test_name], train_names_features[name])
+         if train_names_features == {}:
+             cosine_distance[test_name]['None'] = 1
+             missing_attributes.append(test_name)
+         else:
+             for name in train_names_features.keys():
+                 cosine_distance[test_name][name] = cosine_similarity(test_names_features[test_name], train_names_features[name])[0][0]
+                 euc_distance[test_name][name] = distance.euclidean(test_names_features[test_name], train_names_features[name])
           
-
+    return cosine_distance, euc_distance
 
 def cal_probability(distance_dic,name):
-     file_path = open('../Results/Distances/' + name + '.csv','w')
+     file_path = open('../Results/Distances/All_distances_combined/' + name + '.csv','w')
      Out = csv.writer(file_path,delimiter=',')
      
      new_row = ['test_attribute' , 'train_attribute' , 'distance', 'probability']
