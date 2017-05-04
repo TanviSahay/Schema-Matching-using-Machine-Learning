@@ -1,0 +1,9 @@
+combined method,,Centroid Method,
+Clusters,Silhouette Score,Clusters,Silhouette Score
+25,0.418,25,0.51
+30,0.507,30,0.47
+35,0.448,35,0.46
+40,0.536,40,0.53
+45,0.498,45,0.42
+50,0.476,50,0.44
+55,0.517,55,0.42

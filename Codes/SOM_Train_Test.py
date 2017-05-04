@@ -39,8 +39,8 @@ for i in range(0,len(c_features[0])):
      Features.append(column)
 
 
-x = 7
-y = 7
+x = input('x attribute of grid')
+y = input('y attribute of grid')
 #Number of iterations to run
 
 iteration = input("Input number of iterations: ")
@@ -89,14 +89,14 @@ for k in TestFeatures.keys():
 '''
 print attribute_cluster
 
-pickle.dump(attribute_cluster,open('../Results/SOM_train_test_with_normal_49.pickle','w'))
+#pickle.dump(attribute_cluster,open('../Results/SOM_train_test_with_normal_49.pickle','w'))
 
 
 #Open the output file for test data clusters
 out_file_path_test = '../Results/Distances/SOM_with_normal_'+ str(x*y) + '_itr' + str(iteration) +'.csv'
 out_file = open(out_file_path_test,'w')
 output_file = csv.writer(out_file, delimiter = ',')
-output_file.writerow(["Attribute", "Cluster ID"])            
+#output_file.writerow(["Attribute", "Cluster ID"])            
 
 for key1,value in attribute_cluster.items():
     for key2 in value.keys():
@@ -111,7 +111,7 @@ for f in Features:
 
 silhouetteScore = silhouette_score(Features, labels)
 
-print silhouetteScore
+print str(x*y), silhouetteScore
 
 print 'Train Data: ', DataFeatures['tr_state']
 print 'Test Data: ', TestFeatures['ts_state']
