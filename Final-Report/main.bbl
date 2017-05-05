@@ -8,6 +8,11 @@ Jacob Berlin and Amihai Motro.
   Information Systems Engineering}, CAiSE '02, pages 452--466, London, UK, UK,
   2002. Springer-Verlag.
 
+\bibitem{SOM}
+Teuvo Kohonen.
+\newblock {\em Self-Organizing Maps}.
+\newblock Springer, 1997.
+
 \bibitem{ref1}
 Wen-Syan Li and Chris Clifton.
 \newblock Semantic integration in heterogeneous databases using neural

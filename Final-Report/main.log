@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.3.6)  4 MAY 2017 18:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.3.6)  4 MAY 2017 22:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -294,17 +294,17 @@ e
 
 
 ]
-Underfull \hbox (badness 1533) in paragraph at lines 507--508
+Underfull \hbox (badness 1533) in paragraph at lines 504--505
 \OT1/ptm/m/n/10 schema based and not in-stance based. In the pro-posed
  []
 
 
-Underfull \hbox (badness 1694) in paragraph at lines 517--517
+Underfull \hbox (badness 1694) in paragraph at lines 509--509
  \OT1/ptm/b/it/10 iMAP:Discovering Com-plex Se-man-tic Matches be-tween
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 520--521
+Underfull \hbox (badness 10000) in paragraph at lines 512--513
 
  []
 
@@ -317,86 +317,63 @@ Missing character: There is no ™ in font ptmr7t!
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 574--577
+Underfull \hbox (badness 10000) in paragraph at lines 563--566
 \OT1/ptm/m/it/10 Value\OT1/ptm/m/n/10 : Street Name, S[]Name, St[]Name, Str[]Na
 me,
  []
 
 
-Underfull \hbox (badness 2932) in paragraph at lines 574--577
+Underfull \hbox (badness 2932) in paragraph at lines 563--566
 \OT1/ptm/m/n/10 S[]Number, Street Num-ber, StNum-ber, StNo, Apt[]Num,
  []
 
 
-Underfull \hbox (badness 4454) in paragraph at lines 574--577
+Underfull \hbox (badness 4454) in paragraph at lines 563--566
 \OT1/ptm/m/n/10 Apart-ment[]Number, Apart-ment Num-ber, Apart-ment No,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 578--581
+Underfull \hbox (badness 10000) in paragraph at lines 567--570
 
  []
 
 [3]
-Underfull \hbox (badness 7415) in paragraph at lines 660--661
-[]\OT1/ptm/m/it/10 Self Or-gan-is-ing Map: \OT1/ptm/m/n/10 A Ko-ho-nen Self-Org
-anizing
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \hbox (badness 1558) in paragraph at lines 649--650
+[]\OT1/ptm/m/it/10 Self Or-gan-is-ing Map[[]]: \OT1/ptm/m/n/10 A Ko-ho-nen Self
+-Organizing
  []
 
 <1.jpeg, id=20, 554.07pt x 285.065pt>
 File: 1.jpeg Graphic file (type jpg)
  <use 1.jpeg>
-Package pdftex.def Info: 1.jpeg used on input line 664.
+Package pdftex.def Info: 1.jpeg used on input line 653.
 (pdftex.def)             Requested size: 221.62407pt x 114.02397pt.
  [4 <./1.jpeg>]
-<sc.jpg, id=25, 642.4pt x 365.365pt>
-File: sc.jpg Graphic file (type jpg)
- <use sc.jpg>
-Package pdftex.def Info: sc.jpg used on input line 705.
-(pdftex.def)             Requested size: 256.95544pt x 146.1434pt.
+<som2.jpg, id=25, 530.98375pt x 347.2975pt>
+File: som2.jpg Graphic file (type jpg)
+ <use som2.jpg>
+Package pdftex.def Info: som2.jpg used on input line 697.
+(pdftex.def)             Requested size: 238.94048pt x 156.28242pt.
 
-Overfull \hbox (3.90558pt too wide) in paragraph at lines 705--706
+<kmeans.jpg, id=26, 727.71875pt x 381.425pt>
+File: kmeans.jpg Graphic file (type jpg)
+ <use kmeans.jpg>
+Package pdftex.def Info: kmeans.jpg used on input line 703.
+(pdftex.def)             Requested size: 254.70537pt x 133.50075pt.
+
+Overfull \hbox (1.6555pt too wide) in paragraph at lines 703--704
 [][] 
- []
-
-[5 <./sc.jpg>] <tr.jpeg, id=29, 1024.82875pt x 556.0775pt>
-File: tr.jpeg Graphic file (type jpg)
- <use tr.jpeg>
-Package pdftex.def Info: tr.jpeg used on input line 769.
-(pdftex.def)             Requested size: 256.20656pt x 139.01903pt.
-
-Overfull \hbox (3.1567pt too wide) in paragraph at lines 769--770
- [][] 
- []
-
-<test.jpeg, id=30, 1016.79875pt x 513.92pt>
-File: test.jpeg Graphic file (type jpg)
- <use test.jpeg>
-Package pdftex.def Info: test.jpeg used on input line 776.
-(pdftex.def)             Requested size: 254.19907pt x 128.47968pt.
-
-Overfull \hbox (1.1492pt too wide) in paragraph at lines 776--777
- [][] 
  []
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 781--782
-
- []
-
-<combined.jpeg, id=31, 998.73125pt x 551.05875pt>
-File: combined.jpeg Graphic file (type jpg)
- <use combined.jpeg>
-Package pdftex.def Info: combined.jpeg used on input line 785.
-(pdftex.def)             Requested size: 249.68219pt x 137.76434pt.
- [6 <./tr.jpeg> <./test.jpeg> <./combined.jpeg>] (./main.bbl)
+[5 <./som2.jpg>] (./main.bbl [6 <./kmeans.jpg>])
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -410,29 +387,33 @@ Before submitting the final camera ready copy, remember to:
 
 [7
 
-] (./main.aux) ) 
+] (./main.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
- 3273 strings out of 493029
- 49324 string characters out of 6136235
- 126081 words of memory out of 5000000
- 6775 multiletter control sequences out of 15000+600000
- 38495 words of font info for 69 fonts, out of 8000000 for 9000
+ 3263 strings out of 493029
+ 49176 string characters out of 6136235
+ 127060 words of memory out of 5000000
+ 6765 multiletter control sequences out of 15000+600000
+ 39602 words of font info for 70 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
- 38i,11n,23p,1719b,228s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/u
-rw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8
-a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (7 pages, 634741 bytes).
+ 38i,11n,23p,2314b,228s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8
+a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on main.pdf (7 pages, 292512 bytes).
 PDF statistics:
- 74 PDF objects out of 1000 (max. 8388607)
+ 72 PDF objects out of 1000 (max. 8388607)
  49 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 26 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
