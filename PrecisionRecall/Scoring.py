@@ -4,8 +4,8 @@ import csv
 from collections import defaultdict
 import operator
 
-csv_file_1="C:/Users/Shruti Jadon/Desktop/DatabaseProject/PrecisionRecall/First.csv"
-csv_file_2="C:/Users/Shruti Jadon/Desktop/DatabaseProject/PrecisionRecall/Second.csv"
+csv_file_1="C:/Users/Shruti Jadon/Desktop/DatabaseProject/PrecisionRecall/FinalSOM_edit_45.csv"
+csv_file_2="C:/Users/Shruti Jadon/Desktop/DatabaseProject/PrecisionRecall/FinalSOM_edit_50.csv"
 csv_file_3="C:/Users/Shruti Jadon/Desktop/DatabaseProject/PrecisionRecall/Manual_Mapping.csv"
 def extract_file(csv_file):
     df = pd.read_csv(csv_file) #you can also use df['column_name']
@@ -35,13 +35,21 @@ def extracted_files(csv_file):
         else:
             temp_dictionary[test_attribute[i]].append((probability[i],train_attribute[i]))
     dict_1=defaultdict(list)
-    dict_2={}
-    dict_3={}
+    for key in temp_dictionary.keys():
+        print temp_dictionary[key]
+        temp_dictionary[key].sort(key=lambda x: x[0], reverse=True)
+        print "after sorting"
+        print temp_dictionary[key]
+        print "new value"
     for keys in temp_dictionary.keys():
         #print keys +":::::"
         x= temp_dictionary[keys]
-        for values in range(0,len(x)):
-            dict_1[keys].append(x[values][1])
+        if(len(x)>3):
+            for values in range(0,3):
+                dict_1[keys].append(x[values][1])
+        else:
+            for values in range(0,len(x)):
+                dict_1[keys].append(x[values][1])
     #return dict_1, dict_2, dict_3
     return dict_1  
     
@@ -76,13 +84,15 @@ def F1score(evaluation_file,manual_file):
                 else:
                     for values in evaluation_file[e_key]:
                         if(manual_file[m_key]==evaluation_file[e_key][values]):
+                            print "yo"
                             fn=fn+1
     precision=(tp*1.0)/(tp+fp)
     recall=(tp*1.0)/(tp+fn)
     F1_Score=(2*precision*recall)/(precision+recall)
     second_score=tp*1.0/max_len
-    return F1_Score, second_score
-    
+    return precision, recall, F1_Score, second_score
+
+
 print F1score(First,Manual)
 
 print F1score(Second,Manual)
